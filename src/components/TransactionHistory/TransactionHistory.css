@@ -1,0 +1,16 @@
+.transactionHistory__table {
+  overflow-x: scroll;
+}
+
+.transactionHistory__table::-webkit-scrollbar {
+  display: none;
+}
+
+.transactionHistory thead tr td {
+  border: none !important;
+  background-color: lightgray;
+}
+
+.transactionHistory tbody tr td {
+  border: none !important;
+}

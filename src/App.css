@@ -1,0 +1,201 @@
+:root {
+  --light-blue: #0069aa;
+  --purple: #2e1a47;
+  --white-color: #fff;
+  --orange-color: #fd870f;
+  --red-color: #de162b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.form__group {
+  border: 1px solid rgb(219, 219, 219);
+  font-size: 14px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 39px;
+  padding: 9px 0 7px 8px;
+}
+
+.form__group label {
+  border: 0;
+  position: absolute;
+  font-size: 12px;
+  color: rgb(142, 142, 142);
+  height: 36px;
+}
+
+.form__group input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.form__group input:valid + label {
+  top: -1px;
+  font-size: 10px;
+}
+
+.form__group input:valid {
+  padding-top: 5px;
+}
+
+.admin__content table {
+  width: 80%;
+}
+
+.admin__content tr td {
+  border: thin solid gray;
+  padding: 8px;
+}
+
+.admin__content tr td button {
+  padding: 10px 15px;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--red-color);
+  border: none;
+  color: var(--white-color);
+}
+
+.admin__content tr td a {
+  text-decoration: underline;
+  color: #120c23;
+}
+
+.admin__content h1 {
+  margin-bottom: 20px;
+}
+
+.code__header {
+  margin-bottom: 1rem;
+}
+
+.code__header h2 {
+  margin-bottom: 1rem;
+}
+
+.code__header p {
+  line-height: 1.5rem;
+}
+
+.code__body form {
+  margin-top: 30px;
+}
+
+.code__body .form__group {
+  margin-bottom: 20px;
+}
+
+.code__body .form__group button {
+  width: auto;
+  padding-top: 10px;
+  padding: 10px;
+  color: var(--white-color);
+  cursor: pointer;
+  border: none;
+}
+
+.code__body .form__group .red_btn {
+  background-color: var(--red-color);
+}
+
+.code__body .code__footer {
+  padding-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.code__body .cont {
+  padding: 0;
+  border: none;
+  width: 50%;
+}
+
+.code__body .goBack {
+  padding: 0;
+  border: none;
+  margin-top: 5px !important;
+  display: inline;
+}
+
+.code__header p a {
+  color: #0a2d7e;
+}
+
+/** Register Page **/
+.register__nav {
+  background-color: var(--purple);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.register__nav a {
+  color: inherit;
+}
+
+.register__form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.register__form form .form__group {
+  width: 350px;
+  margin-bottom: 20px;
+}
+
+.register__form form .form__group select {
+  border: none;
+  outline: none;
+}
+
+.create__account-btn button {
+  padding: 15px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--purple);
+  color: var(--white-color);
+}
+
+@media screen and (max-width: 1050px) {
+  .admin__content table {
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .register__form form .form__group {
+    width: 260px;
+  }
+}

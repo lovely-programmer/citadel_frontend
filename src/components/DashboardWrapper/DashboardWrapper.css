@@ -1,0 +1,126 @@
+.dashboardDetails {
+  background-color: #f7f7fa;
+  padding: 2rem 0;
+}
+
+.dashboardDetails__container {
+  display: flex;
+  gap: 2rem;
+}
+
+.dashboardDetails__right {
+  padding: 1rem;
+  box-shadow: 0 0 0.75rem var(--white-color);
+  width: 80%;
+  background-color: var(--white-color);
+}
+
+.dashboardDetails__left ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboardDetails__left ul li {
+  padding: 1rem;
+}
+
+.dashboardDetails__left ul li.active {
+  background-color: var(--white-color);
+}
+
+.dashboardDetails__left ul li:hover {
+  background-color: var(--white-color);
+}
+
+.dashboardDetails__left ul li.active a svg {
+  fill: #0c2074;
+}
+
+.dashboardDetails__left ul li a img {
+  width: 20px;
+}
+
+.dashboardDetails__left ul li:hover a svg {
+  fill: #0c2074;
+}
+
+.dashboardDetails__left ul li a,
+.dashboardDetails__left ul li .dashboad__logout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.5;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1050px) {
+  .dashboardDetails {
+    padding: 0;
+    position: relative;
+  }
+
+  .dashboardDetails .container {
+    margin: 0;
+  }
+
+  .dashboardDetails__left {
+    display: none;
+    position: absolute;
+    z-index: 5000;
+    height: calc(100vh - 75px);
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+    left: 0;
+  }
+
+  .dashboardDetails__left ul li a svg {
+    fill: #0c2074;
+  }
+
+  .dashboardDetails__left ul li div {
+    color: #0c2074;
+  }
+
+  .dashboardDetails__left ul li a,
+  .dashboardDetails__left ul li .dashboad__logout {
+    flex-direction: row;
+    font-size: 2rem;
+    gap: 2rem;
+  }
+
+  .dashboardDetails__left ul li a svg,
+  .dashboardDetails__left ul li a img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .br {
+    display: none;
+  }
+
+  .dashboardDetails__right {
+    width: 100%;
+    margin-top: 2rem;
+    margin-left: 0;
+    z-index: 50;
+  }
+}
+
+@media screen and (max-width: 671px) {
+  .dashboardDetails__left ul li a svg,
+  .dashboardDetails__left ul li a img {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .dashboardDetails__left ul li a,
+  .dashboardDetails__left ul li .dashboad__logout {
+    flex-direction: row;
+    font-size: 1.25rem;
+    gap: 1.25rem;
+  }
+}

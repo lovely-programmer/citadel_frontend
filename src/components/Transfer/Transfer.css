@@ -1,0 +1,47 @@
+.transfer__container h1 {
+  margin-bottom: 20px;
+}
+
+.transfer__container form .form__group {
+  margin-bottom: 20px;
+}
+
+.transfer__container form .form__group select {
+  outline: none;
+  border: none;
+}
+
+.transfer__container form .btn {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.transfer__container form .form__group button {
+  outline: none;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  background-color: var(--purple);
+  color: var(--white-color);
+}
+
+.transfer__container .cont__transaction .form__group {
+  margin-bottom: 20px;
+  border: none;
+}
+
+.transfer__container .cont__transaction .form__group button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.transfer__container .cont__transaction .red__btn button {
+  background-color: var(--red-color);
+  color: var(--white-color);
+}
+
+.transfer__container .cont__transaction .purple__btn button {
+  background-color: var(--purple);
+  color: var(--white-color);
+}

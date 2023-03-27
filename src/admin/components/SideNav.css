@@ -1,0 +1,44 @@
+.sideNav {
+  background-color: #120c23;
+  color: var(--red-color);
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.sideNav__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sideNav__container-content {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--white-color);
+  padding-bottom: 1rem;
+}
+
+.sideNav__container-content h3 {
+  margin-bottom: 1rem;
+}
+
+.sideNav__container-content a {
+  color: var(--white-color);
+  display: flex;
+  line-height: 1.5;
+  padding-bottom: 1rem;
+}
+
+.sideNav__container-content a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1050px) {
+  .sideNav {
+    display: none;
+  }
+
+  .display {
+    display: block;
+  }
+}

@@ -1,0 +1,146 @@
+.admin__dashboard {
+  display: flex;
+  gap: 30px;
+}
+
+.admin__content {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.admin__children {
+  width: 100%;
+}
+
+.admin__content .form__group {
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.admin__content form {
+  margin-top: 10px;
+}
+
+.admin__content .btn {
+  border: none;
+  padding: 0;
+}
+
+.authDetails {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.authDetails__container {
+  width: 500px;
+}
+
+.authDetails__content h2 {
+  padding-bottom: 1rem;
+}
+
+.authDetails__content h3 {
+  padding-bottom: 1rem;
+}
+
+.authDetails__content p {
+  font-size: 1rem;
+  padding-bottom: 2rem;
+}
+
+.authDetails__form .form__group {
+  margin-bottom: 20px;
+}
+
+.authDetails__form .btn {
+  border: none;
+  width: 100%;
+  padding: 0;
+}
+
+.authDetails__form .btn .admin__login-btn {
+  padding: 12px;
+  background-color: var(--purple);
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+.admin__content .form__group input {
+  width: 80%;
+}
+
+.admin__content .form__group select {
+  outline: none;
+  border: none;
+  padding: 0;
+}
+
+.admin__content .form__group button {
+  padding: 15px;
+  width: 80%;
+  background-color: var(--purple);
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+.admin__content table {
+  width: 80%;
+}
+
+.admin__content tr td {
+  border: thin solid gray;
+  padding: 8px;
+}
+
+.admin__content tr td button {
+  padding: 10px 15px;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--red-color);
+  border: none;
+  color: var(--white-color);
+}
+
+.admin__content tr td a {
+  text-decoration: underline;
+  color: #120c23;
+}
+
+.admin__content h1 {
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 1050px) {
+  .admin__dashboard {
+    overflow-x: scroll;
+    min-height: 100vh;
+    gap: 0;
+  }
+
+  .admin__children {
+    margin-left: 2rem;
+  }
+
+  .admin__content table {
+    width: auto;
+  }
+
+  .authNav__logo {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 671px) {
+  .dashboard__profile {
+    margin-right: 20px;
+  }
+
+  .authDetails {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    justify-content: flex-start;
+  }
+}

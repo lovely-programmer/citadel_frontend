@@ -1,0 +1,23 @@
+.account__container h2 {
+  padding-bottom: 2rem;
+}
+
+.account__details table {
+  width: 100%;
+}
+
+.account__details tr td {
+  border: thin solid #f7f7fa;
+  padding: 20px 8px;
+  font-size: 1rem;
+}
+
+/* .left {
+  color: #0c2074;
+  font-weight: bold;
+} */
+
+.right {
+  /* color: #0c2074; */
+  font-weight: bold;
+}

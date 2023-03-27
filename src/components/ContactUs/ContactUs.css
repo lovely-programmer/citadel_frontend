@@ -1,0 +1,36 @@
+.contactUs__bankName {
+  padding: 1rem 0;
+  font-size: 1.25rem;
+}
+
+.contactUs__email {
+  padding-bottom: 1rem;
+}
+
+.contactUs form .form__group {
+  margin-bottom: 20px;
+}
+
+.contactUs form .text__area {
+  height: 100%;
+}
+
+.contactUs form .form__group textarea {
+  border: none;
+  outline: none;
+}
+
+.contactUs form .btn {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.contactUs form .form__group button {
+  outline: none;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  background-color: var(--purple);
+  color: var(--white-color);
+}
