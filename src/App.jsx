@@ -7,7 +7,7 @@ import Transfer from "./pages/Transfer";
 import History from "./pages/History";
 import Contact from "./pages/Contact";
 import RequestImf from "./pages/RequestImf";
-import RequestTax from "./pages/RequestTax";
+import RequestCot from "./pages/RequestCot";
 import RequestAtc from "./pages/RequestAtc";
 import RequestTcc from "./pages/RequestTcc";
 import TransferManagent from "./admin/TransferMangement/TransferManagent";
@@ -31,7 +31,7 @@ function App() {
         <Route path="/transactions" element={<History />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/request/imf" element={<RequestImf />} />
-        <Route path="/request/tax" element={<RequestTax />} />
+        <Route path="/request/cot" element={<RequestCot />} />
         <Route path="/request/atc" element={<RequestAtc />} />
         <Route path="/request/tcc" element={<RequestTcc />} />
         <Route path="/admin" element={<AdminDashboard />} />

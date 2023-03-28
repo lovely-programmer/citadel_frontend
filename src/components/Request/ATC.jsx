@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   updateBalance,
   createTransaction,
+  sendTransactionMail,
 } from "../../features/auth/transactionSlice";
 import { getMe, reset, updateAtc } from "../../features/auth/user";
 import Spinner from "../spinner/Spinner";
@@ -66,16 +67,29 @@ function ATC() {
       dispatch(updateAtc(userId));
       dispatch(updateBalance(userData));
       dispatch(createTransaction(trans));
+      dispatch(
+        sendTransactionMail({
+          account_name: onGoingTransaction?.name,
+          amount: onGoingTransaction?.amount,
+          account_number: parseInt(onGoingTransaction?.account_number),
+          account_balance: userInfo?.balance - onGoingTransaction?.amount,
+          recipient_email: onGoingTransaction?.email,
+        })
+      );
       toast.success("Transaction Successful");
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         navigate("/transactions");
       }, 1000);
-      timer();
-      clearTimeout(timer);
       localStorage.removeItem("transferData");
       setOngoingTransaction(null);
     }
   };
+
+  console.log(
+    userInfo?.balance - onGoingTransaction?.amount,
+    parseInt(onGoingTransaction?.account_number),
+    onGoingTransaction?.email
+  );
 
   if (isLoading) {
     return <Spinner />;

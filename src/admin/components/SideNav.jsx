@@ -19,7 +19,7 @@ function SideNav({ toggle }) {
         </div>
         <div className="sideNav__container-content">
           <h3>Transactions Management</h3>
-          <Link to="/admin/transfer_management">Bank Transfer</Link>
+          {/* <Link to="/admin/transfer_management">Bank Transfer</Link> */}
           <Link to="/admin/generate">Generate Code</Link>
         </div>
         <div className="sideNav__container-content">

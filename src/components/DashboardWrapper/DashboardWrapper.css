@@ -56,6 +56,10 @@
   cursor: pointer;
 }
 
+.dashboardDetails__left ul li .dashboad__logout span {
+  color: #0c2074;
+}
+
 @media screen and (max-width: 1050px) {
   .dashboardDetails {
     padding: 0;

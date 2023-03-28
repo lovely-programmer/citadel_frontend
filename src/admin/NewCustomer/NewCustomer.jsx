@@ -172,6 +172,7 @@ function NewCustomer() {
                 <option value="">Account Type</option>
                 <option value="Savings">Savings</option>
                 <option value="Checking">Checking</option>
+                <option value="Investment">Investment</option>
               </select>
             </div>
             <div className="form__group">

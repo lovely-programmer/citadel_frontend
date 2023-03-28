@@ -30,6 +30,23 @@ export const createTransaction = createAsyncThunk(
   }
 );
 
+export const sendTransactionMail = createAsyncThunk(
+  "transaction/sendTransactionMail",
+  async (data, thunkAPI) => {
+    try {
+      return await transactionService.sendTransactionMail(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const getTransaction = createAsyncThunk(
   "transaction/getTransaction",
   async (_, thunkAPI) => {

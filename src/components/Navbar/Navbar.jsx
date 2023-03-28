@@ -5,7 +5,7 @@ import { HiX } from "react-icons/hi";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login, reset } from "../../features/auth/authSlice";
+import { login, reset, sendMail } from "../../features/auth/authSlice";
 import Spinner from "../spinner/Spinner";
 import { toast } from "react-toastify";
 
@@ -47,6 +47,15 @@ function Navbar() {
 
     if (isSuccess || user) {
       navigate("/dashboard");
+    }
+
+    if (isSuccess) {
+      dispatch(
+        sendMail({
+          recipient_email: user?.email,
+          message: "You have Successfully Login to Your account",
+        })
+      );
     }
 
     dispatch(reset());

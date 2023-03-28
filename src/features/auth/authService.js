@@ -26,6 +26,15 @@ const login = async (userData) => {
   return response.data;
 };
 
+const sendMail = async (data) => {
+  const response = await axios.post(
+    "https://citadel-backend.onrender.com/send_recovery_email",
+    data
+  );
+
+  return response.data;
+};
+
 // @Login Admin
 const loginAdmin = async (userData) => {
   const response = await axios.post(API_URL + "login", userData);
@@ -174,7 +183,7 @@ const updateImf = async (userId, token) => {
   return response.data;
 };
 
-const updateTax = async (userId, token) => {
+const updateCot = async (userId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -182,7 +191,7 @@ const updateTax = async (userId, token) => {
   };
 
   const response = await axios.put(
-    API_URL + "updateTax/" + userId.id,
+    API_URL + "updateCot/" + userId.id,
     userId,
     config
   );
@@ -239,6 +248,7 @@ const deleteUser = async (id, token) => {
 const authService = {
   register,
   login,
+  sendMail,
   loginAdmin,
   getMe,
   updateProfilePicture,
@@ -250,7 +260,7 @@ const authService = {
   getCode,
   updateTcc,
   updateImf,
-  updateTax,
+  updateCot,
   updateAtc,
 };
 

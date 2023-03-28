@@ -1,12 +1,12 @@
 import DashboardWrapper from "../components/DashboardWrapper/DashboardWrapper";
-import TAX from "../components/Request/TAX";
+import COT from "../components/Request/COT";
 
-function RequestTax() {
+function RequestCot() {
   return (
     <DashboardWrapper>
-      <TAX />
+      <COT />
     </DashboardWrapper>
   );
 }
 
-export default RequestTax;
+export default RequestCot;

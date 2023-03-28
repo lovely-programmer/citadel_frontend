@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   createTransaction,
+  sendTransactionMail,
   updateBalance,
 } from "../../features/auth/transactionSlice";
 import { getMe, reset } from "../../features/auth/user";
@@ -47,6 +48,8 @@ function Transfer() {
     remark,
     transaction_type: "Debit",
     name: userInfo?.name,
+    email: userInfo?.email,
+    account_number: accountNumber,
   };
 
   const trans = {
@@ -71,8 +74,8 @@ function Transfer() {
       navigate("/request/tcc");
     } else if (userInfo?.imf_code_need === true) {
       navigate("/request/imf");
-    } else if (userInfo?.tax_code_need === true) {
-      navigate("/request/tax");
+    } else if (userInfo?.cot_code_need === true) {
+      navigate("/request/cot");
     } else if (userInfo?.atc_code_need === true) {
       navigate("/request/atc");
     } else {
@@ -81,6 +84,15 @@ function Transfer() {
       } else {
         dispatch(updateBalance(userData));
         dispatch(createTransaction(trans));
+        dispatch(
+          sendTransactionMail({
+            account_name: userInfo?.name,
+            amount,
+            account_number: parseInt(accountNumber),
+            account_balance: userInfo?.balance - amount,
+            recipient_email: userInfo?.email,
+          })
+        );
         toast.success("Transaction Successfully");
         setTimeout(() => {
           navigate("/transactions");
@@ -180,6 +192,7 @@ function Transfer() {
                 value={accountType}
                 name=""
                 id=""
+                required
               >
                 <option value="">Account Type</option>
                 <option value="Savings">Savings</option>

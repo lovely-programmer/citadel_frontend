@@ -5,14 +5,14 @@ import {
   updateBalance,
   createTransaction,
 } from "../../features/auth/transactionSlice";
-import { getMe, reset, updateTax } from "../../features/auth/user";
+import { getMe, reset, updateCot } from "../../features/auth/user";
 import Spinner from "../spinner/Spinner";
 import { toast } from "react-toastify";
 
-function TAX() {
+function COT() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [taxCode, setTaxCode] = useState();
+  const [cotCode, setCotCode] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [onGoingTransaction, setOngoingTransaction] = useState();
 
@@ -60,23 +60,22 @@ function TAX() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userInfo?.tax_code !== taxCode) {
-      toast.error("Invalid TAX Code");
+    if (userInfo?.cot_code !== cotCode) {
+      toast.error("Invalid COT Code");
     } else if (
-      userInfo?.tax_code === taxCode &&
+      userInfo?.cot_code === cotCode &&
       userInfo?.atc_code_need === true
     ) {
-      dispatch(updateTax(userId));
+      dispatch(updateCot(userId));
       navigate("/request/atc");
-    } else if (userInfo?.tax_code === taxCode) {
-      dispatch(updateTax(userId));
+    } else if (userInfo?.cot_code === cotCode) {
+      dispatch(updateCot(userId));
       dispatch(updateBalance(userData));
       dispatch(createTransaction(trans));
       toast.success("Transaction Successful");
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         navigate("/transactions");
       }, 1000);
-      timer();
       clearTimeout(timer);
       localStorage.removeItem("transferData");
       setOngoingTransaction(null);
@@ -91,9 +90,9 @@ function TAX() {
     <div className="code">
       <div className="code__container">
         <div className="code__header">
-          <p>Enter TAX code to Continue Transaction Process</p>
+          <p>Enter COT code to Continue Transaction Process</p>
           <p>
-            I don't have my TAX Code. Contact First Trust Customer Care via
+            I don't have my COT Code. Contact First Trust Customer Care via
             email: <Link to="/contact">customer_care@firstrustfinance.com</Link>
           </p>
         </div>
@@ -101,11 +100,11 @@ function TAX() {
           <form onSubmit={handleSubmit}>
             <div className="form__group">
               <input
-                onChange={(e) => setTaxCode(e.target.value)}
+                onChange={(e) => setCotCode(e.target.value)}
                 type="text"
                 required
               />
-              <label htmlFor="">Input TAX code</label>
+              <label htmlFor="">Input COT code</label>
             </div>
             <div className="form__group cont">
               <button style={{ backgroundColor: "#0a2d7e" }}>CONTINUE</button>
@@ -119,7 +118,7 @@ function TAX() {
           </div>
 
           <p className="code__footer">
-            TAX Request is in accordance to the Constitutional Laws of the
+            COT Request is in accordance to the Constitutional Laws of the
             United States governing the transfer of funds to or from a foreign
             account
           </p>
@@ -129,4 +128,4 @@ function TAX() {
   );
 }
 
-export default TAX;
+export default COT;

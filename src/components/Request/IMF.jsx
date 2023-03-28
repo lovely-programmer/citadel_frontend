@@ -64,19 +64,18 @@ function IMF() {
       toast.error("Invalid IMF Code");
     } else if (
       userInfo?.imf_code === imfCode &&
-      userInfo?.tax_code_need === true
+      userInfo?.cot_code_need === true
     ) {
       dispatch(updateImf(userId));
-      navigate("/request/tax");
+      navigate("/request/cot");
     } else if (userInfo?.imf_code === imfCode) {
       dispatch(updateImf(userId));
       dispatch(updateBalance(userData));
       dispatch(createTransaction(trans));
       toast.success("Transaction Successfully");
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         navigate("/transactions");
       }, 1000);
-      timer();
       clearTimeout(timer);
       localStorage.removeItem("transferData");
       setOngoingTransaction(null);

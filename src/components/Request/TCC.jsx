@@ -73,11 +73,9 @@ function TCC() {
       dispatch(updateBalance(userData));
       dispatch(createTransaction(trans));
       toast.success("Transaction Successfully");
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         navigate("/transactions");
       }, 1000);
-      timer();
-      clearTimeout(timer);
       localStorage.removeItem("transferData");
       setOngoingTransaction(null);
     }

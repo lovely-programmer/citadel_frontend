@@ -16,6 +16,15 @@ const createTransaction = async (data, token) => {
   return response.data;
 };
 
+const sendTransactionMail = async (data) => {
+  const response = await axios.post(
+    "https://citadel-backend.onrender.com/send_recovery_email/transfer",
+    data
+  );
+
+  return response.data;
+};
+
 const getTransactions = async (token) => {
   const config = {
     headers: {
@@ -46,6 +55,7 @@ const updateBalance = async (userData, token) => {
 
 const transactionService = {
   createTransaction,
+  sendTransactionMail,
   getTransactions,
   updateBalance,
 };

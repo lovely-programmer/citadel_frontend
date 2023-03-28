@@ -138,12 +138,12 @@ export const updateImf = createAsyncThunk(
   }
 );
 
-export const updateTax = createAsyncThunk(
-  "auth/updateTax",
+export const updateCot = createAsyncThunk(
+  "auth/updateCot",
   async (userId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await authService.updateTax(userId, token);
+      return await authService.updateCot(userId, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -334,14 +334,26 @@ export const userSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(updateTax.pending, (state) => {
+      .addCase(updateCot.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateTax.fulfilled, (state) => {
+      .addCase(updateCot.fulfilled, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
       })
-      .addCase(updateTax.rejected, (state, action) => {
+      .addCase(updateCot.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(updateAtc.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAtc.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(updateAtc.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
