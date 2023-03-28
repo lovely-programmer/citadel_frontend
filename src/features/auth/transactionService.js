@@ -2,7 +2,11 @@ import axios from "axios";
 
 // const API_URL = "http://localhost:5000/api/transaction/";
 
+// const MAIL_URL = "http://localhost:5000/send_recovery_email/";
+
 const API_URL = "https://citadel-backend.onrender.com/api/transaction/";
+
+const MAIL_URL = "https://citadel-backend.onrender.com/send_recovery_email/";
 
 const createTransaction = async (data, token) => {
   const config = {
@@ -16,11 +20,30 @@ const createTransaction = async (data, token) => {
   return response.data;
 };
 
-const sendTransactionMail = async (data) => {
-  const response = await axios.post(
-    "https://citadel-backend.onrender.com/send_recovery_email/transfer",
-    data
+const Edit = async (userData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(
+    API_URL + "edit/" + userData.id,
+    userData,
+    config
   );
+
+  return response.data;
+};
+
+const sendTransactionMail = async (data) => {
+  const response = await axios.post(MAIL_URL + "transfer", data);
+
+  return response.data;
+};
+
+const sendUpdateUser = async (data) => {
+  const response = await axios.post(MAIL_URL + "update", data);
 
   return response.data;
 };
@@ -58,6 +81,8 @@ const transactionService = {
   sendTransactionMail,
   getTransactions,
   updateBalance,
+  Edit,
+  sendUpdateUser,
 };
 
 export default transactionService;

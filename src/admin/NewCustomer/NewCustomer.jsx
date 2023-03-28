@@ -3,7 +3,7 @@ import AdminWrapper from "../components/AdminWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, reset } from "../../features/auth/authSlice";
+import { register, reset, sendMail } from "../../features/auth/authSlice";
 import { useState, useEffect } from "react";
 import { convertToBase64 } from "../../features/auth/upload";
 import Spinner from "../../components/spinner/Spinner";
@@ -47,6 +47,14 @@ function NewCustomer() {
     }
 
     if (isSuccess) {
+      dispatch(
+        sendMail({
+          recipient_email: email,
+          message: "You have Successfully Created Your account",
+          subject: `"Welcome ${username}`,
+        })
+      );
+
       navigate("/admin/managecustomers");
     }
 

@@ -2,6 +2,15 @@
   box-shadow: 0 0 0.75rem #cdcdd3;
 }
 
+.authNav__logo a img {
+  width: 150px;
+}
+
+.nav__logo img {
+  width: 150px;
+  height: auto !important;
+}
+
 .dashboardNav__container {
   display: flex;
   padding: 1rem 20px;

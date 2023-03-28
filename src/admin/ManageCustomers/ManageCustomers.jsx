@@ -48,8 +48,8 @@ function ManageCustomers() {
               <tr>
                 <td className="right">Name</td>
                 <td className="right">Account Number</td>
-                <td className="right">Account Balance</td>
                 <td className="right">Account Type</td>
+                <td className="right">Account Balance</td>
                 <td className="right">Edit</td>
                 <td className="right">Delete</td>
               </tr>

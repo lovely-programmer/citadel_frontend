@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, reset } from "../features/auth/authSlice";
+import { register, reset, sendMail } from "../features/auth/authSlice";
 import Spinner from "../components/spinner/Spinner";
 
 function RegisterUser() {
@@ -43,6 +43,16 @@ function RegisterUser() {
 
     if (isSuccess || user) {
       navigate("/dashboard");
+    }
+
+    if (isSuccess) {
+      dispatch(
+        sendMail({
+          recipient_email: email,
+          message: "You have Successfully Created Your account",
+          subject: `Welcome ${username}`,
+        })
+      );
     }
 
     dispatch(reset());
@@ -151,6 +161,7 @@ function RegisterUser() {
                 <option value="">Select Account</option>
                 <option value="Savings">Savings</option>
                 <option value="Checking">Checking</option>
+                <option value="Investment">Investment</option>
               </select>
             </div>
             <div className="form__group">

@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login, reset, sendMail } from "../../features/auth/authSlice";
 import Spinner from "../spinner/Spinner";
 import { toast } from "react-toastify";
+import CitadelLogo from "../../assets/citadel.jpg";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
@@ -53,7 +54,9 @@ function Navbar() {
       dispatch(
         sendMail({
           recipient_email: user?.email,
-          message: "You have Successfully Login to Your account",
+          message:
+            "You have Successfully Login to Your account Note: If you did not initiate the login in please chat with us via Whatsapp on +1 (831) 401-4352 or send an email to customerservice@example.com",
+          subject: "Login Successful",
         })
       );
     }
@@ -105,8 +108,7 @@ function Navbar() {
             <div className="navbar__bottom-left">
               <div className="nav__logo">
                 <Link to="/">
-                  <h2 className="long__ccb">Citadel Choice Bank</h2>
-                  <h2 className="short__ccb">C.C.B</h2>
+                  <img src={CitadelLogo} alt="" />
                 </Link>
               </div>
             </div>

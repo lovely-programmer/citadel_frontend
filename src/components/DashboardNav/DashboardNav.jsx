@@ -9,6 +9,7 @@ import { HiX } from "react-icons/hi";
 // import { upload } from "../../features/auth/upload";
 import { getMe, updateProfilePicture } from "../../features/auth/user";
 import { reset } from "../../features/auth/authSlice";
+import CitadelLogo from "../../assets/citadel.jpg";
 
 function DashboardNav({ toggle, setToggle }) {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ function DashboardNav({ toggle, setToggle }) {
       <div className="dashboardNav__container container">
         <div className="authNav__logo">
           <Link to="/dashboard">
-            <h1>Citadel Choice Bank</h1>
+            <img src={CitadelLogo} alt="" />
           </Link>
         </div>
         <div className="dashboardNav__content">
@@ -101,8 +102,7 @@ function DashboardNav({ toggle, setToggle }) {
               </li>
               <li className="nav__logo">
                 <Link to="/dashboard">
-                  <h2 className="long__ccb">Citadel Choice Bank</h2>
-                  <h2 className="short__ccb">C.C.B</h2>
+                  <img src={CitadelLogo} alt="" />
                 </Link>
               </li>
               <li>

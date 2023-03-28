@@ -30,11 +30,46 @@ export const createTransaction = createAsyncThunk(
   }
 );
 
+export const Edit = createAsyncThunk(
+  "transaction/Edit",
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await transactionService.Edit(userData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const sendTransactionMail = createAsyncThunk(
   "transaction/sendTransactionMail",
   async (data, thunkAPI) => {
     try {
       return await transactionService.sendTransactionMail(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const sendUpdateUser = createAsyncThunk(
+  "transaction/sendTransactionMail",
+  async (data, thunkAPI) => {
+    try {
+      return await transactionService.sendUpdateUser(data);
     } catch (error) {
       const message =
         (error.response &&
@@ -135,6 +170,18 @@ export const transactionSlice = createSlice({
         state.transaction = action.payload;
       })
       .addCase(getTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(Edit.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(Edit.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(Edit.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

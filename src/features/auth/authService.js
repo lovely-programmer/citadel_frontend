@@ -2,7 +2,11 @@ import axios from "axios";
 
 // const API_URL = "http://localhost:5000/api/users/";
 
+// const MAIL_URL = "http://localhost:5000/send_recovery_email/";
+
 const API_URL = "https://citadel-backend.onrender.com/api/users/";
+
+const MAIL_URL = "https://citadel-backend.onrender.com/send_recovery_email/";
 
 // @Register user
 const register = async (userData) => {
@@ -27,10 +31,7 @@ const login = async (userData) => {
 };
 
 const sendMail = async (data) => {
-  const response = await axios.post(
-    "https://citadel-backend.onrender.com/send_recovery_email",
-    data
-  );
+  const response = await axios.post(MAIL_URL, data);
 
   return response.data;
 };
