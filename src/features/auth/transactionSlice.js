@@ -84,10 +84,10 @@ export const sendUpdateUser = createAsyncThunk(
 
 export const getTransaction = createAsyncThunk(
   "transaction/getTransaction",
-  async (_, thunkAPI) => {
+  async (userId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await transactionService.getTransactions(token);
+      return await transactionService.getTransactions(userId, token);
     } catch (error) {
       const message =
         (error.response &&

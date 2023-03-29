@@ -61,26 +61,48 @@ function EditUser() {
     };
 
     const transactionDetails = {
+      id,
       amount: formData.update_balance,
       remark: formData.remark,
       transaction_type: formData.action,
       name: formData.name,
-      date: new Date().toLocaleDateString("en-US"),
+      // date: new Date().toLocaleDateString("en-US"),
+      date: formData.date,
     };
 
     dispatch(Edit(userData));
 
     dispatch(createTransaction(transactionDetails));
 
-    dispatch(
-      sendUpdateUser({
-        amount: formData.update_balance,
-        recipient_email: formData.email,
-        account_name: formData.name,
-        account_balance:
-          parseInt(formData.balance) + parseInt(formData.update_balance),
-      })
-    );
+    if (formData.action === "credit") {
+      dispatch(
+        sendUpdateUser({
+          subject: "Credit Alert",
+          amount: formData.update_balance,
+          recipient_email: formData.email,
+          account_name: formData.name,
+          account_number: formData.account_number,
+          alert: "Credit",
+          remark: formData.remark,
+          account_balance:
+            parseInt(formData.balance) + parseInt(formData.update_balance),
+        })
+      );
+    } else if (formData.action === "debit") {
+      dispatch(
+        sendUpdateUser({
+          subject: "Debit Alert",
+          amount: formData.update_balance,
+          recipient_email: formData.email,
+          account_name: formData.name,
+          account_number: formData.account_number,
+          alert: "Credit",
+          remark: formData.remark,
+          account_balance:
+            parseInt(formData.balance) - parseInt(formData.update_balance),
+        })
+      );
+    }
 
     navigate("/admin/managecustomers");
   };
@@ -160,6 +182,16 @@ function EditUser() {
                 onChange={handleChange}
               />
               <label htmlFor="remark">Remark</label>
+            </div>
+
+            <div className="form__group">
+              <input
+                required
+                onChange={handleChange}
+                name="date"
+                type="date"
+                id=""
+              />
             </div>
 
             <div className="form__group btn">

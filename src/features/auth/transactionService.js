@@ -48,14 +48,19 @@ const sendUpdateUser = async (data) => {
   return response.data;
 };
 
-const getTransactions = async (token) => {
+const getTransactions = async (userId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.get(API_URL, config);
+  console.log(userId);
+
+  const response = await axios.get(
+    API_URL + "getTransaction/" + userId,
+    config
+  );
 
   return response.data;
 };

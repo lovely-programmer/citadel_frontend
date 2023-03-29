@@ -53,6 +53,7 @@ function Transfer() {
   };
 
   const trans = {
+    id: userInfo?._id,
     amount,
     remark,
     transaction_type: "Debit",

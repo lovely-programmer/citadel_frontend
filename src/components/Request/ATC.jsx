@@ -43,6 +43,7 @@ function ATC() {
   }, []);
 
   const trans = {
+    id: userInfo?._id,
     amount: onGoingTransaction?.amount,
     remark: onGoingTransaction?.remark,
     transaction_type: "Debit",
@@ -72,7 +73,8 @@ function ATC() {
           account_name: onGoingTransaction?.name,
           amount: onGoingTransaction?.amount,
           account_number: parseInt(onGoingTransaction?.account_number),
-          account_balance: userInfo?.balance - onGoingTransaction?.amount,
+          account_balance:
+            userInfo?.balance - parseInt(onGoingTransaction?.amount),
           recipient_email: onGoingTransaction?.email,
         })
       );
@@ -86,9 +88,10 @@ function ATC() {
   };
 
   console.log(
-    userInfo?.balance - onGoingTransaction?.amount,
+    userInfo?.balance - parseInt(onGoingTransaction?.amount),
     parseInt(onGoingTransaction?.account_number),
-    onGoingTransaction?.email
+    onGoingTransaction?.email,
+    onGoingTransaction?.amount
   );
 
   if (isLoading) {

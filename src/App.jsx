@@ -19,6 +19,7 @@ import ManageCustomers from "./admin/ManageCustomers/ManageCustomers";
 import EditUser from "./admin/components/EditUser";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import Text from "./components/text/Text";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           element={<TransferManagent />}
         />
         <Route path="/admin/managecustomers" element={<ManageCustomers />} />
+        <Route path="/test" element={<Text />} />
       </Routes>
       <ToastContainer />
     </div>
