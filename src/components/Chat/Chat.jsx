@@ -48,7 +48,7 @@ function Chat() {
     };
 
     getConversations();
-  }, [user._id]);
+  }, [user._id, startConversation]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -61,7 +61,7 @@ function Chat() {
     };
 
     getMessages();
-  }, [user, currentChat]);
+  }, [user, currentChat, startConversation]);
 
   useEffect(() => {
     socket.current = io("http://localhost:3000");
