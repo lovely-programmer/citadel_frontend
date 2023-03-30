@@ -19,11 +19,15 @@ function Chat() {
 
   const [messages, setMessages] = useState();
 
+  const [startConversation, setStartConversation] = useState(false);
+
+  const [getLocalConversation, setGetLocalConversation] = useState(null);
+
   // const MY_API = "http://localhost:5000/api/";
 
   const MY_API = "https://citadel-backend.onrender.com/api/";
 
-  const { user } = useSelector((state) => state.auth);
+  const { user, isLoading, isSuccess } = useSelector((state) => state.auth);
 
   const socket = useRef();
 
@@ -46,8 +50,6 @@ function Chat() {
     getConversations();
   }, [user._id]);
 
-  console.log(user._id);
-
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -59,9 +61,7 @@ function Chat() {
     };
 
     getMessages();
-  }, [user, currentChat?._id]);
-
-  console.log(messages);
+  }, [user, currentChat]);
 
   useEffect(() => {
     socket.current = io("http://localhost:3000");
@@ -95,7 +95,7 @@ function Chat() {
     const message = {
       sender: user?._id,
       text: newMessage,
-      conversationId: currentChat._id,
+      conversationId: currentChat?._id,
     };
 
     const receiverId = currentChat.members.find(
@@ -118,16 +118,33 @@ function Chat() {
     setNewMessage("");
   };
 
-  // useEffect(() => {
-  //   dispatch(getMe());
-  //   return () => {
-  //     dispatch(reset());
-  //   };
-  // }, []);
-
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    const conversation = localStorage.getItem("conversation")
+      ? JSON.parse(localStorage.getItem("conversation"))
+      : null;
+    setGetLocalConversation(conversation);
+  }, [getLocalConversation]);
+
+  const updateConversation = async (e) => {
+    e.preventDefault();
+
+    setStartConversation(true);
+
+    try {
+      const res = await axios.post(MY_API + "conversations", {
+        senderId: user._id,
+        receiverId: "6421b3892c998f67a5421469",
+      });
+
+      localStorage.setItem("conversation", JSON.stringify(res.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="chat">
@@ -135,7 +152,7 @@ function Chat() {
         <h3>Messages</h3>
       </div>
       <div className="chat__container">
-        {currentChat ? (
+        {currentChat || startConversation || getLocalConversation ? (
           <>
             <div className="messages">
               {messages?.map((m, index) => (
@@ -144,24 +161,28 @@ function Chat() {
                 </div>
               ))}
             </div>
+            <form onSubmit={handleSubmit}>
+              <div className="chat__input">
+                <input
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  value={newMessage}
+                  type="text"
+                  placeholder="Start Typing..."
+                />
+              </div>
+            </form>
           </>
         ) : (
-          <div className="no__messages">
-            <h4>No messages</h4>
-            <p>Messages from the team will show here</p>
-          </div>
+          <>
+            <div className="no__messages">
+              <h4>No messages</h4>
+              <p>Messages from the team will show here</p>
+            </div>
+            <div onClick={updateConversation} className="start__conversion">
+              <button>Start a conversation</button>
+            </div>
+          </>
         )}
-
-        <form onSubmit={handleSubmit}>
-          <div className="chat__input">
-            <input
-              onChange={(e) => setNewMessage(e.target.value)}
-              value={newMessage}
-              type="text"
-              placeholder="Start Typing..."
-            />
-          </div>
-        </form>
       </div>
     </div>
   );

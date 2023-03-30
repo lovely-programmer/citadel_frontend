@@ -20,6 +20,19 @@
   height: 100%;
 }
 
+.start__conversion {
+  display: flex;
+  justify-content: center;
+}
+
+.start__conversion button {
+  padding: 10px;
+  background-color: var(--purple);
+  color: var(--white-color);
+  cursor: pointer;
+  border: none;
+}
+
 .messages {
   height: 80%;
   overflow-y: scroll;

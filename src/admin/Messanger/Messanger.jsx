@@ -23,13 +23,6 @@ export default function Messenger() {
 
   console.log(adminUser._id);
 
-  // useEffect(() => {
-  //   dispatch(getMe());
-  //   return () => {
-  //     dispatch(reset());
-  //   };
-  // }, []);
-
   // const MY_API = "http://localhost:5000/api/";
 
   const MY_API = "https://citadel-backend.onrender.com/api/";
@@ -90,7 +83,7 @@ export default function Messenger() {
     e.preventDefault();
 
     const message = {
-      sender: adminUser?._id,
+      sender: adminUser._id,
       text: newMessage,
       conversationId: currentChat._id,
     };
