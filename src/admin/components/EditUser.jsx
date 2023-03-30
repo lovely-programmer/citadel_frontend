@@ -84,6 +84,7 @@ function EditUser() {
           account_number: formData.account_number,
           alert: "Credit",
           remark: formData.remark,
+          date: formData.date,
           account_balance:
             parseInt(formData.balance) + parseInt(formData.update_balance),
         })
@@ -98,6 +99,7 @@ function EditUser() {
           account_number: formData.account_number,
           alert: "Credit",
           remark: formData.remark,
+          date: formData.date,
           account_balance:
             parseInt(formData.balance) - parseInt(formData.update_balance),
         })

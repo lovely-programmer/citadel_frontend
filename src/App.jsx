@@ -16,10 +16,10 @@ import AdminDashboard from "./admin/Dashboard/Dashboard";
 import AdminLogin from "./admin/Login/AdminLogin";
 import NewCustomer from "./admin/NewCustomer/NewCustomer";
 import ManageCustomers from "./admin/ManageCustomers/ManageCustomers";
+import Messanger from "./admin/Messanger/Messanger";
 import EditUser from "./admin/components/EditUser";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import Text from "./components/text/Text";
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
           element={<TransferManagent />}
         />
         <Route path="/admin/managecustomers" element={<ManageCustomers />} />
-        <Route path="/test" element={<Text />} />
+        <Route path="/admin/messanger" element={<Messanger />} />
       </Routes>
       <ToastContainer />
     </div>

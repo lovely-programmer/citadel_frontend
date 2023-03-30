@@ -11,7 +11,7 @@ import { getMe, updateProfilePicture } from "../../features/auth/user";
 import { reset } from "../../features/auth/authSlice";
 import CitadelLogo from "../../assets/citadel.jpg";
 
-function DashboardNav({ toggle, setToggle }) {
+function DashboardNav({ toggle, setToggle, showChat }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -89,7 +89,7 @@ function DashboardNav({ toggle, setToggle }) {
         </div>
       </div>
 
-      <div className="navbar__mobile">
+      <div className={`navbar__mobile ${showChat && "navbar__mobile-index"}`}>
         <div className="navbar__mobile-content">
           <div className="navbar__mobile-container container">
             <ul>

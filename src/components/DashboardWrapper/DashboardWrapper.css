@@ -9,10 +9,48 @@
 }
 
 .dashboardDetails__right {
+  position: relative;
   padding: 1rem;
   box-shadow: 0 0 0.75rem var(--white-color);
   width: 80%;
   background-color: var(--white-color);
+}
+
+.dashbordIndex {
+  z-index: 0 !important;
+}
+
+.show__cat {
+  position: fixed;
+  width: 45%;
+  right: 0;
+  bottom: 85px;
+  margin-right: 10px;
+  z-index: 1000;
+}
+
+.chatbot {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.chatbot__svg {
+  background-color: var(--purple);
+  padding: 20px;
+  border-radius: 50%;
+}
+
+.chatbot__svg svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--white-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .dashboardDetails__left ul {
@@ -114,6 +152,18 @@
   }
 }
 
+@media screen and (max-width: 870px) {
+  .show__cat {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .show__cat {
+    width: 50%;
+  }
+}
+
 @media screen and (max-width: 671px) {
   .dashboardDetails__left ul li a svg,
   .dashboardDetails__left ul li a img {
@@ -126,5 +176,28 @@
     flex-direction: row;
     font-size: 1.25rem;
     gap: 1.25rem;
+  }
+
+  .show__cat {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .show__cat {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .show__cat {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .show__cat {
+    width: 100%;
+    padding-left: 20px;
   }
 }

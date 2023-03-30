@@ -85,13 +85,13 @@ function GenerateCode() {
                 <td className="right">Name</td>
                 {/* <td className="right">Account Number</td> */}
                 <td className="right">TCC CODE</td>
-                <td className="right">TCC CODE COST</td>
+                {/* <td className="right">TCC CODE COST</td> */}
                 <td className="right">IMF</td>
-                <td className="right">IMF COST</td>
+                {/* <td className="right">IMF COST</td> */}
                 <td className="right">COT</td>
-                <td className="right">COT cost</td>
+                {/* <td className="right">COT cost</td> */}
                 <td className="right">ATC CODE</td>
-                <td className="right">ATC CODE COST</td>
+                {/* <td className="right">ATC CODE COST</td> */}
               </tr>
             </thead>
             <tbody>
@@ -109,19 +109,19 @@ function GenerateCode() {
                     <td className="right">{user?.username}</td>
                     {/* <td className="right">{user?.account_number}</td> */}
                     <td className="right"> {user?.tcc_code} </td>
-                    <td className="right">{user?.tcc_code_price}</td>
+                    {/* <td className="right">{user?.tcc_code_price}</td> */}
                     <td className="right"> {user?.imf_code}</td>
-                    <td className="right"> {user?.imf_code_price} </td>
+                    {/* <td className="right"> {user?.imf_code_price} </td> */}
                     <td className="right">{user?.cot_code}</td>
-                    <td className="right">{user?.cot_code_price}</td>
+                    {/* <td className="right">{user?.cot_code_price}</td> */}
                     <td className="right"> {user?.atc_code} </td>
-                    <td className="right">{user?.atc_code_price}</td>
+                    {/* <td className="right">{user?.atc_code_price}</td> */}
                   </tr>
                 ))}
             </tbody>
           </table>
 
-          <form onSubmit={generateCode}>
+          {/* <form onSubmit={generateCode}>
             <div className="form__group">
               <input
                 onChange={(e) => setCodePrice(e.target.value)}
@@ -147,7 +147,7 @@ function GenerateCode() {
             <div className="form__group btn">
               <button>Generate Code</button>
             </div>
-          </form>
+          </form> */}
         </div>
       </div>
     </AdminWrapper>

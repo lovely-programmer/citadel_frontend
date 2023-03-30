@@ -54,11 +54,17 @@ function Account() {
               </tr>
               <tr>
                 <td className="left">Current Balance:</td>
-                <td className="right">{userInfo?.balance}.00</td>
+                <td className="right">
+                  {userInfo?.balance}
+                  {userInfo?.balance && <span>.00</span>}
+                </td>
               </tr>
               <tr>
                 <td className="left">Available Balance:</td>
-                <td className="right">{userInfo?.balance}.00 </td>
+                <td className="right">
+                  {userInfo?.balance}
+                  {userInfo?.balance && <span>.00</span>}
+                </td>
               </tr>
             </tbody>
           </table>

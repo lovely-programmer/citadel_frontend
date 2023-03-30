@@ -2,13 +2,16 @@ import "./DashboardWrapper.css";
 import { Link, useLocation } from "react-router-dom";
 import DashboardNav from "../DashboardNav/DashboardNav";
 import { HiLogout } from "react-icons/hi";
-import { BsFillChatDotsFill } from "react-icons/bs";
+import { BsFillChatDotsFill, BsBoxArrowDown } from "react-icons/bs";
+import { SiChatbot } from "react-icons/si";
 import { logOut } from "../../features/auth/authSlice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Chat from "../Chat/Chat";
 
 function DashboardWrapper({ children }) {
   const { pathname } = useLocation();
+  const [showChat, setShowChat] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -17,7 +20,11 @@ function DashboardWrapper({ children }) {
   return (
     <>
       <div>
-        <DashboardNav toggle={toggle} setToggle={setToggle} />
+        <DashboardNav
+          toggle={toggle}
+          setToggle={setToggle}
+          showChat={showChat}
+        />
       </div>
       <div className="dashboardDetails">
         <div className="dashboardDetails__container container">
@@ -98,7 +105,29 @@ function DashboardWrapper({ children }) {
             </ul>
           </div>
 
-          <div className="dashboardDetails__right">{children}</div>
+          <div
+            className={`dashboardDetails__right ${
+              showChat && "dashbordIndex"
+            } `}
+          >
+            <div className="show__cat">{showChat && <Chat />}</div>
+            <div className="chatbot">
+              {showChat ? (
+                <div
+                  onClick={() => setShowChat(false)}
+                  className="chatbot__svg"
+                >
+                  <BsBoxArrowDown />
+                </div>
+              ) : (
+                <div onClick={() => setShowChat(true)} className="chatbot__svg">
+                  <SiChatbot />
+                </div>
+              )}
+              {/* {showChat ? <BsBoxArrowDown /> : <SiChatbot />} */}
+            </div>
+            <div>{children}</div>
+          </div>
         </div>
       </div>
     </>

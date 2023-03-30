@@ -54,6 +54,10 @@
   display: none;
 }
 
+.navbar__mobile-index {
+  z-index: 0 !important;
+}
+
 .navbar__mobile-content {
   box-shadow: 0 0 0.75rem #cdcdd3;
   width: 100%;
