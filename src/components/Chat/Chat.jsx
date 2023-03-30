@@ -21,7 +21,7 @@ function Chat() {
 
   // const MY_API = "http://localhost:5000/api/";
 
-  const MY_API = "https://citadel-backend.onrender.com/api/transaction/";
+  const MY_API = "https://citadel-backend.onrender.com/api/";
 
   const { user } = useSelector((state) => state.auth);
 
