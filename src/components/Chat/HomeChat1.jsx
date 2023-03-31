@@ -173,7 +173,7 @@ function HomeChat1() {
     try {
       const res = await axios.post(MY_API + "conversations", {
         senderId: userId,
-        receiverId: "6421b3892c998f67a5421469",
+        receiverId: "6426be779b79d2d3a3cb2feb",
       });
 
       localStorage.setItem("conversation__visit", JSON.stringify(res.data));
