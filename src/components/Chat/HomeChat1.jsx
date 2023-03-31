@@ -2,15 +2,22 @@ import { useState, useEffect, useRef } from "react";
 import "./Chat.css";
 import { io } from "socket.io-client";
 import Message from "../message/Message";
-import { useSelector, useDispatch } from "react-redux";
-import { getMe, reset } from "../../features/auth/user";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import emailjs from "@emailjs/browser";
 
-function Chat() {
+function HomeChat1() {
   const scrollRef = useRef();
-
   const form = useRef();
+
+  const [ifUserVisited, setIfUserVisited] = useState(null);
+  const [userDetail, setUserDetail] = useState({});
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    const user = localStorage.getItem("visited_user_details");
+    user && setIfUserVisited(JSON.parse(user));
+  }, []);
 
   const [conversations, setConversations] = useState([]);
 
@@ -26,11 +33,9 @@ function Chat() {
 
   const [getLocalConversation, setGetLocalConversation] = useState(null);
 
-  // const MY_API = "http://localhost:5000/api/";
+  const MY_API = "http://localhost:5000/api/";
 
-  const MY_API = "https://citadel-backend.onrender.com/api/";
-
-  const { user, isLoading, isSuccess } = useSelector((state) => state.auth);
+  // const MY_API = "https://citadel-backend.onrender.com/api/";
 
   const socket = useRef();
 
@@ -43,7 +48,9 @@ function Chat() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get(MY_API + "conversations/" + user?._id);
+        const res = await axios.get(
+          MY_API + "conversations/" + ifUserVisited?.userId
+        );
         setConversations(res.data);
       } catch (error) {
         console.log(error);
@@ -51,7 +58,7 @@ function Chat() {
     };
 
     getConversations();
-  }, [user._id, startConversation]);
+  }, [userDetail.userId, ifUserVisited?.userId, startConversation]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -64,7 +71,7 @@ function Chat() {
     };
 
     getMessages();
-  }, [user, currentChat, startConversation]);
+  }, [userDetail.userId, currentChat, startConversation]);
 
   useEffect(() => {
     socket.current = io("http://localhost:3000");
@@ -79,12 +86,12 @@ function Chat() {
   }, []);
 
   useEffect(() => {
-    socket.current.emit("addUser", user?._id);
+    socket.current.emit("addUser", userDetail.userId || ifUserVisited?.userId);
 
     socket.current.on("getUsers", (users) => {
       // console.log(users);
     });
-  }, [user]);
+  }, [userDetail.userId, ifUserVisited?.userId]);
 
   useEffect(() => {
     arrivalMessage &&
@@ -96,17 +103,17 @@ function Chat() {
     e.preventDefault();
 
     const message = {
-      sender: user?._id,
+      sender: userDetail.userId || ifUserVisited?.userId,
       text: newMessage,
       conversationId: currentChat?._id,
     };
 
     const receiverId = currentChat.members.find(
-      (member) => member._id !== user?._id
+      (member) => member._id !== userDetail.userId || ifUserVisited?.userId
     );
 
     socket.current.emit("sendMessage", {
-      senderId: user?._id,
+      senderId: userDetail.userId || ifUserVisited?.userId,
       receiverId,
       text: newMessage,
     });
@@ -126,14 +133,16 @@ function Chat() {
   }, [messages]);
 
   useEffect(() => {
-    const conversation = localStorage.getItem("conversation")
-      ? JSON.parse(localStorage.getItem("conversation"))
+    const conversation = localStorage.getItem("conversation__visit")
+      ? JSON.parse(localStorage.getItem("conversation__visit"))
       : null;
     setGetLocalConversation(conversation);
   }, []);
 
   const updateConversation = async (e) => {
     e.preventDefault();
+
+    setStartConversation(true);
 
     emailjs
       .sendForm(
@@ -152,15 +161,22 @@ function Chat() {
         }
       );
 
-    setStartConversation(true);
+    const userId = uuidv4();
+
+    setUserDetail({ username, email, userId });
+
+    localStorage.setItem(
+      "visited_user_details",
+      JSON.stringify({ userId, username, email })
+    );
 
     try {
       const res = await axios.post(MY_API + "conversations", {
-        senderId: user._id,
+        senderId: userId,
         receiverId: "6421b3892c998f67a5421469",
       });
 
-      localStorage.setItem("conversation", JSON.stringify(res.data));
+      localStorage.setItem("conversation__visit", JSON.stringify(res.data));
     } catch (error) {
       console.log(error);
     }
@@ -172,12 +188,18 @@ function Chat() {
         <h3>Messages</h3>
       </div>
       <div className="chat__container">
-        {currentChat || startConversation || getLocalConversation ? (
+        {currentChat ||
+        startConversation ||
+        getLocalConversation ||
+        ifUserVisited ? (
           <>
             <div className="messages">
               {messages?.map((m, index) => (
                 <div key={index} ref={scrollRef}>
-                  <Message message={m} own={m.sender === user?._id} />
+                  <Message
+                    message={m}
+                    own={m.sender === ifUserVisited?.userId}
+                  />
                 </div>
               ))}
             </div>
@@ -194,32 +216,75 @@ function Chat() {
           </>
         ) : (
           <>
-            <div className="no__messages">
-              <form style={{ display: "none" }} ref={form}>
-                <input
-                  readOnly
-                  value={user?.username}
-                  type="text"
-                  name="user_name"
-                />
-                <input
-                  readOnly
-                  value={user?.email}
-                  type="text"
-                  name="user_email"
-                />
-                <textarea
-                  readOnly
-                  value={`${user?.username} started a conversation with you`}
-                  type="text"
-                  name="message"
-                />
+            <div style={{ height: "70%" }} className="no__messages">
+              <form
+                onSubmit={updateConversation}
+                ref={form}
+                style={{ width: "100%" }}
+              >
+                <h4
+                  style={{
+                    width: "100%",
+                    textAlign: "left",
+                  }}
+                >
+                  Enter Full Name
+                </h4>
+
+                <div style={{ width: "100%", marginBottom: "20px" }}>
+                  <input
+                    type="text"
+                    name="user_name"
+                    required
+                    style={{
+                      width: "100%",
+                      outline: "none",
+                      padding: "20px",
+                      borderRadius: "10px",
+                    }}
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                  />
+                </div>
+                <h4
+                  style={{
+                    width: "100%",
+                    textAlign: "left",
+                  }}
+                >
+                  Enter Email Address
+                </h4>
+                <div style={{ width: "100%" }}>
+                  <input
+                    type="email"
+                    name="user_email"
+                    required
+                    style={{
+                      width: "100%",
+                      outline: "none",
+                      padding: "20px",
+                      borderRadius: "10px",
+                    }}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                  />
+                </div>
+
+                <div style={{ display: "none" }}>
+                  <textarea
+                    readOnly
+                    value={`${username} started a conversation with you`}
+                    name="message"
+                  />
+                </div>
+
+                <div
+                  style={{ marginTop: "15px" }}
+                  className="start__conversion"
+                >
+                  <button>Start a conversation</button>
+                </div>
               </form>
-              <h4>No messages</h4>
-              <p>Messages from the team will show here</p>
-            </div>
-            <div onClick={updateConversation} className="start__conversion">
-              <button>Start a conversation</button>
             </div>
           </>
         )}
@@ -228,4 +293,4 @@ function Chat() {
   );
 }
 
-export default Chat;
+export default HomeChat1;

@@ -92,7 +92,7 @@ function TCC() {
           <p>Enter TCC code to Continue Transaction Process</p>
           <p>
             I don't have my TCC Code. Contact First Trust Customer Care via
-            email: <Link to="/contact">customer_care@firstrustfinance.com</Link>
+            email: <Link to="/contact">contact@citadelchoicebank.com</Link>
           </p>
         </div>
         <div className="code__body">

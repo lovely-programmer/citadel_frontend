@@ -63,6 +63,23 @@ export const sendMail = createAsyncThunk(
   }
 );
 
+export const LoginMail = createAsyncThunk(
+  "auth/LoginMail",
+  async (data, thunkAPI) => {
+    try {
+      return await authService.LoginMail(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // @Login Admin
 export const loginAdmin = createAsyncThunk(
   "auth/loginadmin",

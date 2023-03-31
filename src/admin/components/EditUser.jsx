@@ -89,7 +89,8 @@ function EditUser() {
             parseInt(formData.balance) + parseInt(formData.update_balance),
         })
       );
-    } else if (formData.action === "debit") {
+    }
+    if (formData.action === "debit") {
       dispatch(
         sendUpdateUser({
           subject: "Debit Alert",
@@ -97,7 +98,7 @@ function EditUser() {
           recipient_email: formData.email,
           account_name: formData.name,
           account_number: formData.account_number,
-          alert: "Credit",
+          alert: "Debit",
           remark: formData.remark,
           date: formData.date,
           account_balance:

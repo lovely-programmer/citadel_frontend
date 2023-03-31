@@ -5,7 +5,12 @@ import { HiX } from "react-icons/hi";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login, reset, sendMail } from "../../features/auth/authSlice";
+import {
+  login,
+  LoginMail,
+  reset,
+  sendMail,
+} from "../../features/auth/authSlice";
 import Spinner from "../spinner/Spinner";
 import { toast } from "react-toastify";
 import CitadelLogo from "../../assets/citadel.jpg";
@@ -52,11 +57,10 @@ function Navbar() {
 
     if (isSuccess) {
       dispatch(
-        sendMail({
+        LoginMail({
+          name: user?.name,
           recipient_email: user?.email,
-          message:
-            "You have Successfully Login to Your account Note: If you did not initiate the login in please chat with us via Whatsapp on +1 (831) 401-4352 or send an email to customerservice@example.com",
-          subject: "Login Successful",
+          subject: "Login Successfully",
         })
       );
     }

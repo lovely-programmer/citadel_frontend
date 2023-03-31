@@ -1,12 +1,12 @@
 import axios from "axios";
 
-// const API_URL = "http://localhost:5000/api/users/";
+const API_URL = "http://localhost:5000/api/users/";
 
-// const MAIL_URL = "http://localhost:5000/send_recovery_email/";
+const MAIL_URL = "http://localhost:5000/send_recovery_email/";
 
-const API_URL = "https://citadel-backend.onrender.com/api/users/";
+// const API_URL = "https://citadel-backend.onrender.com/api/users/";
 
-const MAIL_URL = "https://citadel-backend.onrender.com/send_recovery_email/";
+// const MAIL_URL = "https://citadel-backend.onrender.com/send_recovery_email/";
 
 // @Register user
 const register = async (userData) => {
@@ -32,6 +32,12 @@ const login = async (userData) => {
 
 const sendMail = async (data) => {
   const response = await axios.post(MAIL_URL, data);
+
+  return response.data;
+};
+
+const LoginMail = async (data) => {
+  const response = await axios.post(MAIL_URL + "login", data);
 
   return response.data;
 };
@@ -263,6 +269,7 @@ const authService = {
   updateImf,
   updateCot,
   updateAtc,
+  LoginMail,
 };
 
 export default authService;
