@@ -24,7 +24,7 @@ function Home() {
       <Disclosures />
       <Footer />
 
-      <div className="show__cat">{showChat && <Chat />}</div>
+      {/* <div className="show__cat">{showChat && <Chat />}</div>
       <div className="chatbot">
         {showChat ? (
           <div onClick={() => setShowChat(false)} className="chatbot__svg">
@@ -35,8 +35,8 @@ function Home() {
             <SiChatbot />
           </div>
         )}
-        {/* {showChat ? <BsBoxArrowDown /> : <SiChatbot />} */}
-      </div>
+       
+      </div> */}
     </div>
   );
 }

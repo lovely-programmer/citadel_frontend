@@ -110,7 +110,7 @@ function DashboardWrapper({ children }) {
               showChat && "dashbordIndex"
             } `}
           >
-            <div className="show__cat">{showChat && <Chat />}</div>
+            {/* <div className="show__cat">{showChat && <Chat />}</div>
             <div className="chatbot">
               {showChat ? (
                 <div
@@ -124,8 +124,8 @@ function DashboardWrapper({ children }) {
                   <SiChatbot />
                 </div>
               )}
-              {/* {showChat ? <BsBoxArrowDown /> : <SiChatbot />} */}
-            </div>
+             
+            </div> */}
             <div>{children}</div>
           </div>
         </div>
