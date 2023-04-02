@@ -17,6 +17,8 @@ function EditUser() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [formData, setFormData] = useState();
+
   const { pathname } = useLocation();
 
   // const MY_API = "http://localhost:5000/api/";
@@ -38,14 +40,13 @@ function EditUser() {
       try {
         const res = await axios.get(MY_API + "users/getOne/?userId=" + id);
         setUser(res.data);
+        setFormData(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getUser();
   }, [id]);
-
-  const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -70,7 +71,6 @@ function EditUser() {
       remark: formData.remark,
       transaction_type: formData.action,
       name: formData.name,
-      // date: new Date().toLocaleDateString("en-US"),
       date: formData.date,
     };
 
@@ -125,22 +125,35 @@ function EditUser() {
           <h1>Edit Customer</h1>
 
           <form onSubmit={handleSubmit} className="authDetails__form">
-            <div className="form__group">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: "10px",
+              }}
+            >
+              <label htmlFor="fullName">Full Name</label>
               <input
+                style={{
+                  width: "80%",
+                  padding: "10px",
+                  outline: "none",
+                  border: "1px solid lightgray",
+                  marginTop: "10px",
+                }}
                 required
                 type="text"
                 id="name"
                 name="name"
-                value={user?.name}
-                onChange={handleChange}
+                value={formData?.name}
+                readOnly
               />
-              <label htmlFor="fullName">Full Name</label>
             </div>
 
             <div className="form__group">
               <select
-                onChange={handleChange}
-                value={user?.account_type}
+                readOnly
+                value={formData?.account_type}
                 name="account_type"
               >
                 <option value="Savings">Savings</option>
@@ -155,15 +168,29 @@ function EditUser() {
                 <option value="credit">credit</option>
               </select>
             </div>
-            <div className="form__group">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: "10px",
+              }}
+            >
+              <label htmlFor="balance">Account Balance</label>
               <input
+                style={{
+                  width: "80%",
+                  padding: "10px",
+                  outline: "none",
+                  border: "1px solid lightgray",
+                  marginTop: "10px",
+                }}
                 type="number"
                 required
                 id="balance"
                 name="balance"
-                value={user?.balance}
+                readOnly
+                value={formData?.balance}
               />
-              <label htmlFor="balance">Account Balance</label>
             </div>
 
             <div className="form__group">

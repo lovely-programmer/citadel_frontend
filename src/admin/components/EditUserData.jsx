@@ -23,7 +23,7 @@ function EditUserData() {
 
   const id = pathname.split("/")[3];
 
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState();
 
   useEffect(() => {
     if (user) {
@@ -36,6 +36,7 @@ function EditUserData() {
       try {
         const res = await axios.get(MY_API + "users/getOne/?userId=" + id);
         setUser(res.data);
+        setFormData(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -82,7 +83,7 @@ function EditUserData() {
                 type="text"
                 id="fullName"
                 name="name"
-                value={user?.name}
+                value={formData?.name}
                 onChange={handleChange}
               />
               <label htmlFor="fullName">Full Name</label>
@@ -94,7 +95,7 @@ function EditUserData() {
                 type="text"
                 id="email"
                 name="name"
-                value={user?.email}
+                value={formData?.email}
                 onChange={handleChange}
               />
               <label htmlFor="email">Email</label>
@@ -103,7 +104,7 @@ function EditUserData() {
             <div className="form__group">
               <select
                 onChange={handleChange}
-                defaultValue={user?.account_type}
+                value={formData?.account_type}
                 name="account_type"
               >
                 <option value="Savings">Savings</option>
