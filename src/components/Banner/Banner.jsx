@@ -1,4 +1,5 @@
 import "./Banner.css";
+import { Link } from "react-router-dom";
 
 function Banner() {
   return (
@@ -12,7 +13,9 @@ function Banner() {
                 Take the next step with CCB checking, savings and financial
                 tools designed to go wherever you do.
               </span>
-              <button>Get Started</button>
+              <Link to="/signup">
+                <button>Get Started</button>
+              </Link>
             </div>
           </div>
         </div>

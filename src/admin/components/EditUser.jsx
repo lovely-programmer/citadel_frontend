@@ -1,47 +1,51 @@
 import React from "react";
 import AdminWrapper from "../components/AdminWrapper";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { editUser, getAllUsers, reset } from "../../features/auth/user";
 import Spinner from "../../components/spinner/Spinner";
 import {
   createTransaction,
   Edit,
   sendUpdateUser,
 } from "../../features/auth/transactionSlice";
+import axios from "axios";
 
 function EditUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const { pathname } = useLocation();
+
+  // const MY_API = "http://localhost:5000/api/";
+
+  const MY_API = "https://citadel-backend.onrender.com/api/";
 
   const id = pathname.split("/")[3];
 
-  const { allUser, isLoading, isError, message } = useSelector(
-    (state) => state.userInfo
-  );
-
-  const [formData, setFormData] = useState({});
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (isError) {
-      console.log(message);
+    if (user) {
+      setIsLoading(false);
     }
+  }, [user]);
 
-    dispatch(getAllUsers());
-
-    const user = allUser.filter((user) => user._id === id);
-
-    user.forEach((u) => {
-      setFormData(u);
-    });
-
-    return () => {
-      dispatch(reset());
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get(MY_API + "users/getOne/?userId=" + id);
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
     };
-  }, []);
+    getUser();
+  }, [id]);
+
+  const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -127,7 +131,7 @@ function EditUser() {
                 type="text"
                 id="name"
                 name="name"
-                value={formData.name}
+                value={user?.name}
                 onChange={handleChange}
               />
               <label htmlFor="fullName">Full Name</label>
@@ -136,12 +140,9 @@ function EditUser() {
             <div className="form__group">
               <select
                 onChange={handleChange}
-                value={formData.account_type}
+                value={user?.account_type}
                 name="account_type"
               >
-                <option value={formData.account_type}>
-                  {formData.account_type}
-                </option>
                 <option value="Savings">Savings</option>
                 <option value="Current">Current</option>
                 <option value="Investment">Investment</option>
@@ -160,7 +161,7 @@ function EditUser() {
                 required
                 id="balance"
                 name="balance"
-                value={formData.balance}
+                value={user?.balance}
               />
               <label htmlFor="balance">Account Balance</label>
             </div>

@@ -14,6 +14,7 @@ import {
 import Spinner from "../spinner/Spinner";
 import { toast } from "react-toastify";
 import CitadelLogo from "../../assets/citadel.jpg";
+import axios from "axios";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
@@ -21,6 +22,22 @@ function Navbar() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const device = navigator.userAgent;
+  const [ip, setIp] = useState();
+
+  useEffect(() => {
+    const getIp = async () => {
+      try {
+        const res = await axios.get("http://api.ipify.org/");
+        setIp(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getIp();
+  }, [ip]);
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -61,6 +78,8 @@ function Navbar() {
           name: user?.name,
           recipient_email: user?.email,
           subject: "Login Successfully",
+          recipient_ip: ip,
+          recipient_device: device,
         })
       );
     }
@@ -71,6 +90,8 @@ function Navbar() {
   if (isLoading) {
     return <Spinner />;
   }
+
+  console.log(ip);
 
   return (
     <div className="navbar">

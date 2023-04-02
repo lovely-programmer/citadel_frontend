@@ -1,4 +1,23 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 function Text() {
+  const device = navigator.userAgent;
+  const [ip, setIp] = useState();
+
+  useEffect(() => {
+    const getIp = async () => {
+      try {
+        const res = await axios.get("http://api.ipify.org/");
+        setIp(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getIp();
+  }, []);
+
   return (
     <div
       style={{
@@ -8,36 +27,47 @@ function Text() {
       }}
     >
       <div>
-        <h2 style={{ marginBottom: "15px" }}>Dear Osas Code</h2>
+        <h2 style={{ marginBottom: "15px" }}>Welcome!</h2>
+        <p style={{ marginBottom: "10px" }}>Hello, Mark</p>
 
-        <p
-          style={{
-            marginBottom: "15px",
-            fontSize: "18px",
-            color: "blue",
-          }}
-        >
-          You have successfully loggedin in to your account on date
+        <p style={{ marginBottom: "20px" }}>
+          We notice you just login your account from an unauthorized browser
         </p>
 
-        <p
-          style={{
-            marginBottom: "35px",
-            fontSize: "18px",
-            lineHeight: "26px",
-          }}
-        >
-          If If you did not initiate the login in please chat with us via
-          Whatsapp on +1 (831) 401-4352 or send an email to
-          customerservice@example.com
-        </p>
+        <table style={{ marginBottom: "15px" }}>
+          <tbody>
+            <tr>
+              <td style={{ padding: "4px", border: "1px solid black" }}>
+                Device
+              </td>
+              <td style={{ padding: "4px", border: "1px solid black" }}>
+                {device}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ padding: "4px", border: "1px solid black" }}>
+                IP Address
+              </td>
+              <td style={{ padding: "4px", border: "1px solid black" }}>
+                {ip}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ padding: "4px", border: "1px solid black" }}>
+                Date
+              </td>
+              <td style={{ padding: "4px", border: "1px solid black" }}></td>
+            </tr>
+          </tbody>
+        </table>
 
         <p style={{ fontSize: "14px", marginBottom: "35px" }}>
-          Thankyou for choosing CCB
+          Thankyou for choosing Citadel Choice Bank
         </p>
 
         <p>
-          Please note that CCB WILL NEVER ASK YOU FOR YOUR OR ACCOUNT DETAILS
+          Please note that Citadel Choice Bank WILL NEVER ASK YOU FOR YOUR OR
+          ACCOUNT DETAILS
         </p>
       </div>
     </div>

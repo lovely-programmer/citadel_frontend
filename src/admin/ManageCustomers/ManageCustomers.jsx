@@ -51,6 +51,7 @@ function ManageCustomers() {
                 <td className="right">Account Type</td>
                 <td className="right">Account Balance</td>
                 <td className="right">Edit</td>
+                <td className="right">EditData</td>
                 <td className="right">Delete</td>
               </tr>
             </thead>
@@ -70,6 +71,15 @@ function ManageCustomers() {
                         </button>
                       </Link>
                     </td>
+
+                    <td className="right">
+                      <Link to={`/admin/edituserdata/${user?._id}`}>
+                        <button style={{ backgroundColor: "#5CB85C" }}>
+                          EditData
+                        </button>
+                      </Link>
+                    </td>
+
                     <td className="right">
                       <button onClick={() => handleDelete(user?._id)}>
                         Delete

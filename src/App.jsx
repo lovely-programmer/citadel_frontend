@@ -16,11 +16,12 @@ import AdminDashboard from "./admin/Dashboard/Dashboard";
 import AdminLogin from "./admin/Login/AdminLogin";
 import NewCustomer from "./admin/NewCustomer/NewCustomer";
 import ManageCustomers from "./admin/ManageCustomers/ManageCustomers";
-import Messanger from "./admin/Messanger/Messanger";
+// import Messanger from "./admin/Messanger/Messanger";
 import EditUser from "./admin/components/EditUser";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Text from "./components/Text";
+import EditUserData from "./admin/components/EditUserData";
 
 function App() {
   return (
@@ -40,13 +41,14 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/newcustomer" element={<NewCustomer />} />
         <Route path="/admin/edituser/:id" element={<EditUser />} />
+        <Route path="/admin/edituserdata/:id" element={<EditUserData />} />
         <Route path="/admin/generate" element={<GenerateCode />} />
         <Route
           path="/admin/transfer_management"
           element={<TransferManagent />}
         />
         <Route path="/admin/managecustomers" element={<ManageCustomers />} />
-        <Route path="/admin/messanger" element={<Messanger />} />
+        {/* <Route path="/admin/messanger" element={<Messanger />} /> */}
         <Route path="/text" element={<Text />} />
       </Routes>
       <ToastContainer />

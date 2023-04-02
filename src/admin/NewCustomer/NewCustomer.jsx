@@ -50,8 +50,8 @@ function NewCustomer() {
       dispatch(
         sendMail({
           recipient_email: email,
-          message: "You have Successfully Created Your account",
-          subject: `"Welcome ${username}`,
+          recipient_name: name,
+          recipient_username: username,
         })
       );
 
