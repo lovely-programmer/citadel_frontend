@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineMenu } from "react-icons/md";
 import { HiX } from "react-icons/hi";
-// import { upload } from "../../features/auth/upload";
 import { getMe, updateProfilePicture } from "../../features/auth/user";
 import { reset } from "../../features/auth/authSlice";
 import CitadelLogo from "../../assets/citadel.jpg";
+import { convertToBase64 } from "../../features/auth/upload";
 
 function DashboardNav({ toggle, setToggle, showChat }) {
   const navigate = useNavigate();
@@ -19,30 +19,26 @@ function DashboardNav({ toggle, setToggle, showChat }) {
 
   const { user } = useSelector((state) => state.auth);
 
-  // const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null);
 
-  // const userInfo = {
-  //   profilePicture: null,
-  // };
+  useEffect(() => {
+    const handleImage = async () => {
+      if (file) {
+        const base64 = await convertToBase64(file);
 
-  // useEffect(() => {
-  //   const handleImage = async () => {
-  //     if (file) {
-  //       const profilePicture = await upload(file);
+        const userData = {
+          id: userInfo?._id,
+          profilePicture: base64,
+        };
 
-  //       const userData = {
-  //         id: userInfo?._id,
-  //         profilePicture,
-  //       };
+        dispatch(updateProfilePicture(userData));
 
-  //       dispatch(updateProfilePicture(userData));
+        setFile(null);
+      }
+    };
 
-  //       setFile(null);
-  //     }
-  //   };
-
-  //   handleImage();
-  // }, [file, dispatch]);
+    handleImage();
+  }, [file, dispatch]);
 
   useEffect(() => {
     if (!user) {
@@ -60,7 +56,7 @@ function DashboardNav({ toggle, setToggle, showChat }) {
     return () => {
       dispatch(reset());
     };
-  }, [dispatch]);
+  }, [file, dispatch]);
 
   return (
     <div className="dashboardNav">
@@ -107,15 +103,23 @@ function DashboardNav({ toggle, setToggle, showChat }) {
               </li>
               <li>
                 <div className="dashboard__profile">
-                  <img
-                    src={
-                      userInfo?.profilePicture
-                        ? userInfo?.profilePicture
-                        : PersonIcon
-                    }
-                    style={{ cursor: "pointer" }}
-                    alt=""
+                  <input
+                    style={{ display: "none" }}
+                    type="file"
+                    id="profile_picture"
+                    onChange={(e) => setFile(e.target.files[0])}
                   />
+                  <label htmlFor="profile_picture">
+                    <img
+                      src={
+                        userInfo?.profilePicture
+                          ? userInfo?.profilePicture
+                          : PersonIcon
+                      }
+                      style={{ cursor: "pointer" }}
+                      alt=""
+                    />
+                  </label>
                 </div>
               </li>
             </ul>
