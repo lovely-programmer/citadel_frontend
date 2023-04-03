@@ -74,7 +74,7 @@ function DashboardNav({ toggle, setToggle, showChat }) {
             <li>
               <div className="dashboard__profile">
                 <img
-                  src={userInfo?.profilePicture || PersonIcon || picture}
+                  src={userInfo?.profilePicture || picture || PersonIcon}
                   style={{ cursor: "pointer" }}
                   alt=""
                 />
@@ -110,7 +110,7 @@ function DashboardNav({ toggle, setToggle, showChat }) {
                   />
                   <label htmlFor="profile_picture">
                     <img
-                      src={userInfo?.profilePicture || PersonIcon || picture}
+                      src={userInfo?.profilePicture || picture || PersonIcon}
                       style={{ cursor: "pointer" }}
                       alt=""
                     />
