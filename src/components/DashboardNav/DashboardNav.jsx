@@ -27,7 +27,7 @@ function DashboardNav({ toggle, setToggle, showChat }) {
       if (file) {
         const base64 = await convertToBase64(file);
 
-        setPicture = base64;
+        setPicture(base64);
 
         const userData = {
           id: userInfo?._id,
