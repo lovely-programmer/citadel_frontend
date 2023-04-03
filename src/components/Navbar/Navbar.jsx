@@ -91,8 +91,6 @@ function Navbar() {
     return <Spinner />;
   }
 
-  console.log(ip);
-
   return (
     <div className="navbar">
       <div className="navbar__container">

@@ -37,26 +37,26 @@ function Text() {
         <table style={{ marginBottom: "15px" }}>
           <tbody>
             <tr>
-              <td style={{ padding: "4px", border: "1px solid black" }}>
+              <td style={{ padding: "4px", border: "1px solid #b5a4a4" }}>
                 Device
               </td>
-              <td style={{ padding: "4px", border: "1px solid black" }}>
+              <td style={{ padding: "4px", border: "1px solid #b5a4a4" }}>
                 {device}
               </td>
             </tr>
             <tr>
-              <td style={{ padding: "4px", border: "1px solid black" }}>
+              <td style={{ padding: "4px", border: "1px solid #b5a4a4" }}>
                 IP Address
               </td>
-              <td style={{ padding: "4px", border: "1px solid black" }}>
+              <td style={{ padding: "4px", border: "1px solid #b5a4a4" }}>
                 {ip}
               </td>
             </tr>
             <tr>
-              <td style={{ padding: "4px", border: "1px solid black" }}>
+              <td style={{ padding: "4px", border: "1px solid #b5a4a4" }}>
                 Date
               </td>
-              <td style={{ padding: "4px", border: "1px solid black" }}></td>
+              <td style={{ padding: "4px", border: "1px solid #b5a4a4" }}></td>
             </tr>
           </tbody>
         </table>

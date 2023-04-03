@@ -44,8 +44,8 @@ function ATC() {
 
   const trans = {
     id: userInfo?._id,
-    amount: onGoingTransaction?.amount,
-    remark: onGoingTransaction?.remark,
+    amount: amount,
+    remark: remark,
     transaction_type: "Debit",
     name: userInfo?.name,
     date: new Date().toLocaleDateString("en-US"),

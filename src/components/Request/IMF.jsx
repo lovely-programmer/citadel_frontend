@@ -42,8 +42,9 @@ function IMF() {
   }, []);
 
   const trans = {
-    amount: onGoingTransaction?.amount,
-    remark: onGoingTransaction?.remark,
+    id: userInfo?._id,
+    amount: amount,
+    remark: remark,
     transaction_type: "Debit",
     name: userInfo?.name,
     date: new Date().toLocaleDateString("en-US"),

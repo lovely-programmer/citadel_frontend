@@ -14,6 +14,7 @@ import { convertToBase64 } from "../../features/auth/upload";
 function DashboardNav({ toggle, setToggle, showChat }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [picture, setPicture] = useState(null);
 
   const { userInfo, isError, message } = useSelector((state) => state.userInfo);
 
@@ -25,6 +26,8 @@ function DashboardNav({ toggle, setToggle, showChat }) {
     const handleImage = async () => {
       if (file) {
         const base64 = await convertToBase64(file);
+
+        setPicture = base64;
 
         const userData = {
           id: userInfo?._id,
@@ -71,11 +74,7 @@ function DashboardNav({ toggle, setToggle, showChat }) {
             <li>
               <div className="dashboard__profile">
                 <img
-                  src={
-                    userInfo?.profilePicture
-                      ? userInfo?.profilePicture
-                      : PersonIcon
-                  }
+                  src={userInfo?.profilePicture || PersonIcon || picture}
                   style={{ cursor: "pointer" }}
                   alt=""
                 />
@@ -111,11 +110,7 @@ function DashboardNav({ toggle, setToggle, showChat }) {
                   />
                   <label htmlFor="profile_picture">
                     <img
-                      src={
-                        userInfo?.profilePicture
-                          ? userInfo?.profilePicture
-                          : PersonIcon
-                      }
+                      src={userInfo?.profilePicture || PersonIcon || picture}
                       style={{ cursor: "pointer" }}
                       alt=""
                     />

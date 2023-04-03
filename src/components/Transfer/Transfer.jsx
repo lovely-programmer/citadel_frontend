@@ -54,8 +54,8 @@ function Transfer() {
 
   const trans = {
     id: userInfo?._id,
-    amount,
-    remark,
+    amount: amount,
+    remark: remark,
     transaction_type: "Debit",
     name: userInfo?.name,
     date: new Date().toLocaleDateString("en-US"),
