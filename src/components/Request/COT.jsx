@@ -92,8 +92,8 @@ function COT() {
         <div className="code__header">
           <p>Enter COT code to Continue Transaction Process</p>
           <p>
-            I don't have my COT Code. Contact First Trust Customer Care via
-            email: <Link to="/contact">contact@citadelchoicebank.com</Link>
+            I don't have my COT Code. Contact Citadel Choice Bank Customer Care
+            via email: <Link to="/contact">contact@citadelchoicebank.com</Link>
           </p>
         </div>
         <div className="code__body">

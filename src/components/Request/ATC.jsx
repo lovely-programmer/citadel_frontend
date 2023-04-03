@@ -104,8 +104,8 @@ function ATC() {
         <div className="code__header">
           <p>Enter ATC code to Continue Transaction Process</p>
           <p>
-            I don't have my ATC Code. Contact First Trust Customer Care via
-            email: <Link to="/contact">contact@citadelchoicebank.com</Link>
+            I don't have my ATC Code. Contact Citadel Choice Bank Customer Care
+            via email: <Link to="/contact">contact@citadelchoicebank.com</Link>
           </p>
         </div>
         <div className="code__body">
