@@ -15,13 +15,15 @@ function DashboardNav({ toggle, setToggle, showChat }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userInfo, isError, message } = useSelector((state) => state.userInfo);
+  const { userInfo, isSuccess, isError, message } = useSelector(
+    (state) => state.userInfo
+  );
 
   const [profilePicture, setProfilePicture] = useState(null);
 
   useEffect(() => {
     setProfilePicture(userInfo?.profilePicture);
-  }, [profilePicture]);
+  }, [profilePicture, isSuccess]);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -65,6 +67,8 @@ function DashboardNav({ toggle, setToggle, showChat }) {
       dispatch(reset());
     };
   }, [dispatch]);
+
+  console.log(profilePicture);
 
   return (
     <div className="dashboardNav">
