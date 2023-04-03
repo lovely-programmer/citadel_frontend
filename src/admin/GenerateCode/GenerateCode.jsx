@@ -95,7 +95,7 @@ function GenerateCode() {
               </tr>
             </thead>
             <tbody>
-              {allUser.length > 0 &&
+              {allUser?.length > 0 &&
                 allUser?.map((user) => (
                   <tr key={user?._id}>
                     <td>

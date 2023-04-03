@@ -56,7 +56,7 @@ function ManageCustomers() {
               </tr>
             </thead>
             <tbody>
-              {allUser.length > 0 &&
+              {allUser?.length > 0 &&
                 allUser?.map((user) => (
                   <tr key={user?._id}>
                     <td className="right">{user?.username}</td>

@@ -70,7 +70,7 @@ function EditUser() {
       amount: formData.update_balance,
       remark: formData.remark,
       transaction_type: formData.action,
-      name: formData.name,
+      name: formData.sender_name,
       date: formData.date,
     };
 
@@ -85,7 +85,7 @@ function EditUser() {
           amount: formData.update_balance,
           recipient_email: formData.email,
           account_name: formData.name,
-          account_number: formData.account_number,
+          sender_name: formData.sender_name,
           alert: "Credit",
           remark: formData.remark,
           date: formData.date,
@@ -101,7 +101,7 @@ function EditUser() {
           amount: formData.update_balance,
           recipient_email: formData.email,
           account_name: formData.name,
-          account_number: formData.account_number,
+          sender_name: formData.sender_name,
           alert: "Debit",
           remark: formData.remark,
           date: formData.date,
@@ -132,7 +132,7 @@ function EditUser() {
                 marginBottom: "10px",
               }}
             >
-              <label htmlFor="fullName">Full Name</label>
+              <label htmlFor="">Full Name</label>
               <input
                 style={{
                   width: "80%",
@@ -143,8 +143,6 @@ function EditUser() {
                 }}
                 required
                 type="text"
-                id="name"
-                name="name"
                 value={formData?.name}
                 readOnly
               />
@@ -191,6 +189,17 @@ function EditUser() {
                 readOnly
                 value={formData?.balance}
               />
+            </div>
+
+            <div className="form__group">
+              <input
+                type="text"
+                required
+                id="sender_name"
+                name="sender_name"
+                onChange={handleChange}
+              />
+              <label htmlFor="sender_name">Sender Name</label>
             </div>
 
             <div className="form__group">
