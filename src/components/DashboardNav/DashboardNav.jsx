@@ -66,9 +66,7 @@ function DashboardNav({ toggle, setToggle, showChat }) {
     return () => {
       dispatch(reset());
     };
-  }, [dispatch]);
-
-  console.log(profilePicture);
+  }, [file, dispatch]);
 
   return (
     <div className="dashboardNav">
