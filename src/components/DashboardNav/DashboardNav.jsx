@@ -15,15 +15,13 @@ function DashboardNav({ toggle, setToggle, showChat }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userInfo, isSuccess, isError, message } = useSelector(
-    (state) => state.userInfo
-  );
+  const { userInfo, isError, message } = useSelector((state) => state.userInfo);
 
   const [profilePicture, setProfilePicture] = useState(null);
 
   useEffect(() => {
-    setProfilePicture(userInfo?.profilePicture);
-  }, [profilePicture, isSuccess]);
+    setProfilePicture(userInfo.profilePicture);
+  }, [userInfo]);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -34,14 +32,14 @@ function DashboardNav({ toggle, setToggle, showChat }) {
       if (file) {
         const base64 = await convertToBase64(file);
 
-        setProfilePicture(base64);
-
         const userData = {
           id: userInfo?._id,
           profilePicture: base64,
         };
 
         dispatch(updateProfilePicture(userData));
+
+        setProfilePicture(base64);
 
         setFile(null);
       }
@@ -66,7 +64,7 @@ function DashboardNav({ toggle, setToggle, showChat }) {
     return () => {
       dispatch(reset());
     };
-  }, [file, dispatch]);
+  }, [dispatch]);
 
   return (
     <div className="dashboardNav">
