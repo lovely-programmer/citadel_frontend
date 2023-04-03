@@ -17,9 +17,11 @@ function DashboardNav({ toggle, setToggle, showChat }) {
 
   const { userInfo, isError, message } = useSelector((state) => state.userInfo);
 
-  const [profilePicture, setProfilePicture] = useState(
-    userInfo?.profilePicture
-  );
+  const [profilePicture, setProfilePicture] = useState(null);
+
+  useEffect(() => {
+    setProfilePicture(userInfo?.profilePicture);
+  }, []);
 
   const { user } = useSelector((state) => state.auth);
 
