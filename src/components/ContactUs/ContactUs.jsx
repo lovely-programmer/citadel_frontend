@@ -1,31 +1,31 @@
 import { useRef } from "react";
-// import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 import "./ContactUs.css";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function ContactUs() {
   const form = useRef();
 
   const sendEmail = (e) => {
-    // e.preventDefault();
-    // emailjs
-    //   .sendForm(
-    //     "service_t1t5aun",
-    //     "template_lmifd7p",
-    //     form.current,
-    //     "user_AnjF4Y8dbderf60LOsMSF"
-    //   )
-    //   .then(
-    //     (result) => {
-    //       e.target.reset();
-    //       console.log(result.text);
-    //       toast.success("message sent successfully");
-    //     },
-    //     (error) => {
-    //       console.log(error.text);
-    //       toast.error(error.text);
-    //     }
-    //   );
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        "service_etz18uk",
+        "template_i4x4bjg",
+        form.current,
+        "user_AnjF4Y8dbderf60LOsMSF"
+      )
+      .then(
+        (result) => {
+          e.target.reset();
+          console.log(result.text);
+          toast.success("message sent successfully");
+        },
+        (error) => {
+          console.log(error.text);
+          toast.error(error.text);
+        }
+      );
   };
 
   return (
@@ -38,11 +38,7 @@ function ContactUs() {
         </div>
 
         <div className="contactUs__email">
-          E-mail: customer_care@citadelchoicebank.com
-        </div>
-
-        <div className="contactUs__email">
-          E-mail: info@citadelchoicebank.com
+          E-mail: contact@citadelchoicebank.com
         </div>
 
         <div>
