@@ -37,7 +37,7 @@ function Navbar() {
     };
 
     getIp();
-  }, [ip]);
+  }, []);
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -72,7 +72,7 @@ function Navbar() {
       navigate("/dashboard");
     }
 
-    if (isSuccess) {
+    if (isSuccess && ip) {
       dispatch(
         LoginMail({
           name: user?.name,
