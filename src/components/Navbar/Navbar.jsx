@@ -29,7 +29,7 @@ function Navbar() {
   useEffect(() => {
     const getIp = async () => {
       try {
-        const res = await axios.get("http://api.ipify.org/");
+        const res = await axios.get("https://api.ipify.org/");
         setIp(res.data);
       } catch (error) {
         console.log(error);
