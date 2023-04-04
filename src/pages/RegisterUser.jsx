@@ -119,8 +119,7 @@ function RegisterUser() {
         date_of_birth,
       };
 
-      // dispatch(register(userData));
-      console.log(userData);
+      dispatch(register(userData));
     }
   };
 
