@@ -205,8 +205,8 @@ ul {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .register__form form .form__group {
-    width: 260px;
+    width: 100%;
   }
 }
