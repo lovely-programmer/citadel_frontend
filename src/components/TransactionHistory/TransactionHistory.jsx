@@ -52,8 +52,8 @@ function TransactionHistory() {
               </tr>
             </thead>
             <tbody>
-              {transaction.length > 0 &&
-                transaction.map((trans) => (
+              {transaction?.length > 0 &&
+                transaction?.map((trans) => (
                   <tr key={trans?._id}>
                     <td> {trans?.date} </td>
                     <td>{trans?.transaction_type}</td>
