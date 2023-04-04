@@ -5,12 +5,7 @@ import { HiX } from "react-icons/hi";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  login,
-  LoginMail,
-  reset,
-  sendMail,
-} from "../../features/auth/authSlice";
+import { login, LoginMail, reset, logOut } from "../../features/auth/authSlice";
 import Spinner from "../spinner/Spinner";
 import { toast } from "react-toastify";
 import CitadelLogo from "../../assets/citadel.jpg";
@@ -70,8 +65,9 @@ function Navbar() {
         "You account has been placed on hold please contact our customer care"
       );
       localStorage.removeItem("user");
+      dispatch(logOut());
     }
-  }, [user]);
+  }, [user, dispatch]);
 
   useEffect(() => {
     if (isError) {
@@ -82,7 +78,7 @@ function Navbar() {
       navigate("/dashboard");
     }
 
-    if (isSuccess && ip) {
+    if (isSuccess && ip && user?.restricted === false) {
       dispatch(
         LoginMail({
           name: user?.name,
