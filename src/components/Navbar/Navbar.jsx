@@ -60,15 +60,25 @@ function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = { username, password };
+
     dispatch(login(userData));
   };
+
+  useEffect(() => {
+    if (user?.restricted === true) {
+      toast.error(
+        "You account has been placed on hold please contact our customer care"
+      );
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
   useEffect(() => {
     if (isError) {
       toast.error(message);
     }
 
-    if (isSuccess || user) {
+    if (user && user?.restricted === false) {
       navigate("/dashboard");
     }
 

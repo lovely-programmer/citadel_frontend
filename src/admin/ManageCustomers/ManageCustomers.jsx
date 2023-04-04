@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AdminWrapper from "../components/AdminWrapper";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUsers, deleteOffice, reset } from "../../features/auth/user";
+import {
+  getAllUsers,
+  deleteOffice,
+  reset,
+  restrict,
+  unRestrict,
+} from "../../features/auth/user";
 import Spinner from "../../components/spinner/Spinner";
 
 function ManageCustomers() {
@@ -12,6 +18,18 @@ function ManageCustomers() {
   const { allUser, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.userInfo
   );
+
+  const [count, setCount] = useState(0);
+
+  const res = (id) => {
+    dispatch(restrict(id));
+    setCount(count + 1);
+  };
+
+  const unRes = (id) => {
+    dispatch(unRestrict(id));
+    setCount(count + 1);
+  };
 
   const handleDelete = (id) => {
     dispatch(deleteOffice(id));
@@ -31,7 +49,7 @@ function ManageCustomers() {
     return () => {
       dispatch(reset());
     };
-  }, [deleted, dispatch, isError]);
+  }, [deleted, dispatch, isError, count]);
 
   if (isLoading) {
     return <Spinner />;
@@ -52,6 +70,7 @@ function ManageCustomers() {
                 <td className="right">Account Balance</td>
                 <td className="right">Edit</td>
                 <td className="right">EditData</td>
+                <td className="right">Active</td>
                 <td className="right">Delete</td>
               </tr>
             </thead>
@@ -78,6 +97,24 @@ function ManageCustomers() {
                           EditData
                         </button>
                       </Link>
+                    </td>
+
+                    <td className="right">
+                      {user?.restricted ? (
+                        <button
+                          onClick={() => unRes(user?._id)}
+                          style={{ backgroundColor: "#343A40" }}
+                        >
+                          UnRestrict
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => res(user?._id)}
+                          style={{ backgroundColor: "#343A40" }}
+                        >
+                          Restrict
+                        </button>
+                      )}
                     </td>
 
                     <td className="right">

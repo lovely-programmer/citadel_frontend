@@ -121,13 +121,26 @@ const restrict = async (userData, token) => {
     },
   };
 
-  const data = {
-    numberOfRestrictions: userData.numberOfRestriction,
+  const response = await axios.put(
+    API_URL + "restrict/" + userData,
+    userData,
+    config
+  );
+
+  return response.data;
+};
+
+// @Restrict a user
+const unRestrict = async (userData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   };
 
   const response = await axios.put(
-    API_URL + "restrict/" + userData.id,
-    data,
+    API_URL + "unrestrict/" + userData,
+    userData,
     config
   );
 
@@ -264,6 +277,7 @@ const authService = {
   deleteUser,
   restrictedUsers,
   restrict,
+  unRestrict,
   getCode,
   updateTcc,
   updateImf,

@@ -101,6 +101,25 @@ export const restrict = createAsyncThunk(
   }
 );
 
+// @Unrestrict a user
+export const unRestrict = createAsyncThunk(
+  "userInfo/unrestrictUser",
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.adminUser.token;
+      return await authService.unRestrict(userData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Update Tcc
 export const updateTcc = createAsyncThunk(
   "auth/updateTcc",
