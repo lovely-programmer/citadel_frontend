@@ -19,14 +19,14 @@ function TransactionHistory() {
       console.log(message);
     }
 
-    if (userInfo._id) {
-      dispatch(getTransaction(userInfo._id));
+    if (userInfo?._id) {
+      dispatch(getTransaction(userInfo?._id));
     }
 
     return () => {
       dispatch(reset());
     };
-  }, [userInfo._id]);
+  }, [userInfo?._id]);
 
   useEffect(() => {
     dispatch(getMe());
