@@ -163,13 +163,14 @@ ul {
 }
 
 .register__form {
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .register__form form .form__group {
-  width: 350px;
+  width: 500px;
   margin-bottom: 20px;
 }
 
@@ -178,14 +179,24 @@ ul {
   outline: none;
 }
 
+.create__account-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 30px;
+}
+
 .create__account-btn button {
-  padding: 15px;
-  width: 100%;
-  border-radius: 10px;
+  padding: 10px 15px;
+  width: 30%;
   cursor: pointer;
   border: none;
   background-color: var(--purple);
   color: var(--white-color);
+}
+
+.prev_button {
+  background-color: var(--red-color) !important;
 }
 
 @media screen and (max-width: 1050px) {

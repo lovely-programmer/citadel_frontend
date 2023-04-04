@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset, sendMail } from "../features/auth/authSlice";
 import Spinner from "../components/spinner/Spinner";
+import { useMultistepForm } from "../hooks/useMultistepForm";
+import PersonalInfo from "../components/RegisterDetails/PersonalInfo";
+import Address from "../components/RegisterDetails/Address";
+import Account from "../components/RegisterDetails/Account";
+import VerifyIdentity from "../components/RegisterDetails/VerifyIdentity";
 
 function RegisterUser() {
   const [formData, setFormData] = useState({
@@ -16,6 +21,14 @@ function RegisterUser() {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    occupation: "",
+    country: "",
+    city: "",
+    state: "",
+    zip_code: "",
+    social_security: "",
+    confirm_social: "",
+    date_of_birth: "",
   });
 
   const {
@@ -27,6 +40,14 @@ function RegisterUser() {
     phoneNumber,
     password,
     confirmPassword,
+    occupation,
+    country,
+    city,
+    state,
+    zip_code,
+    social_security,
+    confirm_social,
+    date_of_birth,
   } = formData;
 
   const navigate = useNavigate();
@@ -58,17 +79,28 @@ function RegisterUser() {
     dispatch(reset());
   }, [user, isSuccess, isError, message, navigate, dispatch]);
 
-  const handleChange = (e) => {
+  const updateFields = (fields) => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      ...fields,
     }));
   };
 
+  const { step, steps, currentStepIndex, isFirstStep, isLastStep, back, next } =
+    useMultistepForm([
+      <PersonalInfo {...formData} updateFields={updateFields} />,
+      <Address {...formData} updateFields={updateFields} />,
+      <Account {...formData} updateFields={updateFields} />,
+      <VerifyIdentity {...formData} updateFields={updateFields} />,
+    ]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isLastStep) return next();
     if (password !== confirmPassword) {
       toast.error("Password do not match");
+    } else if (social_security !== confirm_social) {
+      toast.error("SSN/TIN do not match");
     } else {
       const userData = {
         username,
@@ -78,8 +110,17 @@ function RegisterUser() {
         address,
         phoneNumber,
         account_type,
+        country,
+        state,
+        city,
+        zip_code,
+        occupation,
+        social_security,
+        date_of_birth,
       };
-      dispatch(register(userData));
+
+      // dispatch(register(userData));
+      console.log(userData);
     }
   };
 
@@ -95,99 +136,34 @@ function RegisterUser() {
             <h2>Citadel Choice Bank</h2>
           </Link>
         </div>
+
         <div className="register__form">
-          <form onSubmit={handleSubmit}>
-            <div className="form__group">
-              <input
-                required
-                type="text"
-                id="username"
-                name="username"
-                value={username}
-                onChange={handleChange}
-              />
-              <label htmlFor="username">Username</label>
-            </div>
-            <div className="form__group">
-              <input
-                required
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={handleChange}
-              />
-              <label htmlFor="name">Full Name</label>
-            </div>
-            <div className="form__group">
-              <input
-                value={email}
-                onChange={handleChange}
-                required
-                id="email"
-                name="email"
-                type="text"
-              />
-              <label htmlFor="email">Email</label>
-            </div>
-            <div className="form__group">
-              <input
-                value={address}
-                onChange={handleChange}
-                required
-                id="address"
-                name="address"
-                type="text"
-              />
-              <label htmlFor="address">Address</label>
-            </div>
-            <div className="form__group">
-              <input
-                value={phoneNumber}
-                onChange={handleChange}
-                required
-                id="phoneNumber"
-                name="phoneNumber"
-                type="text"
-              />
-              <label htmlFor="phoneNumber">Phone Number</label>
-            </div>
-            <div className="form__group">
-              <select
-                onChange={handleChange}
-                value={account_type}
-                name="account_type"
-              >
-                <option value="">Select Account</option>
-                <option value="Savings">Savings</option>
-                <option value="Checking">Checking</option>
-                <option value="Investment">Investment</option>
-              </select>
-            </div>
-            <div className="form__group">
-              <input
-                value={password}
-                onChange={handleChange}
-                required
-                id="password"
-                name="password"
-                type="password"
-              />
-              <label htmlFor="password">Password</label>
-            </div>
-            <div className="form__group">
-              <input
-                value={confirmPassword}
-                onChange={handleChange}
-                required
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-              />
-              <label htmlFor="confirmPassword">Confirm Password</label>
-            </div>
+          <div
+            style={{
+              position: "absolute",
+              top: "-1.5rem",
+              right: "1.5rem",
+              fontSize: "20px",
+              background: "#6565d2",
+              padding: "10px",
+              color: "#fff",
+            }}
+          >
+            <span>{currentStepIndex + 1}</span>
+            <span> / </span>
+            <span>{steps.length}</span>
+          </div>
+          <form style={{ marginTop: "30px" }} onSubmit={handleSubmit}>
+            {step}
+
             <div className="create__account-btn">
-              <button>Create Account</button>
+              {!isFirstStep && (
+                <button type="button" onClick={back} className="prev_button">
+                  Previous
+                </button>
+              )}
+
+              <button type="submit">{isLastStep ? "Finish" : "Next"}</button>
             </div>
           </form>
         </div>
