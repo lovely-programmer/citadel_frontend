@@ -78,11 +78,19 @@ function DashboardNav({ toggle, setToggle, showChat }) {
           <ul>
             <li>
               <div className="dashboard__profile">
-                <img
-                  src={profilePicture ? profilePicture : PersonIcon}
-                  style={{ cursor: "pointer" }}
-                  alt=""
+                <input
+                  style={{ display: "none" }}
+                  type="file"
+                  id="profile_picture"
+                  onChange={(e) => setFile(e.target.files[0])}
                 />
+                <label htmlFor="profile_picture">
+                  <img
+                    src={profilePicture ? profilePicture : PersonIcon}
+                    style={{ cursor: "pointer" }}
+                    alt=""
+                  />
+                </label>
               </div>
             </li>
           </ul>
