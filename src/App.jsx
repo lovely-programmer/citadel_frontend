@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Text from "./components/Text";
 import EditUserData from "./admin/components/EditUserData";
+import IdleTimerContainer from "./hooks/IdleTimerContainer";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/text" element={<Text />} />
       </Routes>
       <ToastContainer />
+      <IdleTimerContainer />
     </div>
   );
 }

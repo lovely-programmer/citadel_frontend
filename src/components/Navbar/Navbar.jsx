@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { MdOutlineMenu } from "react-icons/md";
-import { AiOutlineRight } from "react-icons/ai";
+import {
+  AiOutlineRight,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from "react-icons/ai";
 import { HiX } from "react-icons/hi";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +18,7 @@ import axios from "axios";
 function Navbar() {
   const [toggle, setToggle] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -187,16 +192,32 @@ function Navbar() {
                           <input type="checkbox" id="" />
                           <span>Remember my username</span>
                         </div>
-                        <div className="form__group">
+                        <div
+                          className="form__group"
+                          style={{ flexDirection: "row", paddingRight: "10px" }}
+                        >
                           <input
                             onChange={handleChange}
                             value={password}
                             name="password"
-                            type="password"
+                            type={`${showPassword ? "text" : "password"}`}
                             required
                             id="password"
                           />
                           <label htmlFor="password">Password</label>
+                          {showPassword ? (
+                            <AiOutlineEyeInvisible
+                              fontSize={20}
+                              style={{ cursor: "pointer" }}
+                              onClick={() => setShowPassword(false)}
+                            />
+                          ) : (
+                            <AiOutlineEye
+                              fontSize={20}
+                              style={{ cursor: "pointer" }}
+                              onClick={() => setShowPassword(true)}
+                            />
+                          )}
                         </div>
                         <div className="form__button">
                           <button>Log in</button>
