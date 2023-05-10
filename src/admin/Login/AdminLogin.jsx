@@ -27,7 +27,7 @@ function AdminLogin() {
     }
 
     if (isSuccess && adminUser.isAdmin) {
-      navigate("/admin/managecustomers");
+      navigate("/admin");
     }
 
     dispatch(reset());

@@ -74,11 +74,11 @@ function EditUser() {
       date: formData.date,
     };
 
-    dispatch(Edit(userData));
-
-    dispatch(createTransaction(transactionDetails));
-
     if (formData.action === "credit") {
+      dispatch(createTransaction(transactionDetails));
+
+      dispatch(Edit(userData));
+
       dispatch(
         sendUpdateUser({
           subject: "Credit Alert",
@@ -93,8 +93,11 @@ function EditUser() {
             parseInt(formData.balance) + parseInt(formData.update_balance),
         })
       );
-    }
-    if (formData.action === "debit") {
+    } else if (formData.action === "debit") {
+      dispatch(createTransaction(transactionDetails));
+
+      dispatch(Edit(userData));
+
       dispatch(
         sendUpdateUser({
           subject: "Debit Alert",
