@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Spinner from "../../components/spinner/Spinner";
+import { toast } from "react-toastify";
 import {
   createTransaction,
   Edit,
@@ -57,10 +58,6 @@ function EditUser() {
     }));
   };
 
-  useEffect(() => {
-    isSuccess && navigate("/admin/managecustomers");
-  }, [navigate]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -100,9 +97,13 @@ function EditUser() {
         })
       );
 
-      setIsSuccess(true);
-    }
-    if (formData.action === "debit") {
+      toast.success("Account Credited Successfully");
+
+      formData.sender_name = "";
+      formData.remark = "";
+      formData.date = "";
+      formData.update_balance = "";
+    } else if (formData.action === "debit") {
       dispatch(Edit(userData));
 
       dispatch(createTransaction(transactionDetails));
@@ -122,7 +123,12 @@ function EditUser() {
         })
       );
 
-      setIsSuccess(true);
+      toast.success("Account Debited Successfully");
+
+      formData.sender_name = "";
+      formData.remark = "";
+      formData.date = "";
+      formData.update_balance = "";
     }
   };
 
