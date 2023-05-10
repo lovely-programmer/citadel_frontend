@@ -1,6 +1,6 @@
 import React from "react";
 import AdminWrapper from "../components/AdminWrapper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Spinner from "../../components/spinner/Spinner";
@@ -17,6 +17,14 @@ function EditUser() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const { isEditLoading, isEditSuccess } = useSelector(
+    (state) => state.transactionsInfo
+  );
+
+  const { isCreateTransLoading, isCreateTransSuccess } = useSelector(
+    (state) => state.transactionsInfo
+  );
+
   const [formData, setFormData] = useState();
 
   const { pathname } = useLocation();
@@ -28,6 +36,12 @@ function EditUser() {
   const id = pathname.split("/")[3];
 
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (isEditSuccess && isCreateTransSuccess) {
+      navigate("/admin/managecustomers");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (user) {
@@ -74,11 +88,11 @@ function EditUser() {
       date: formData.date,
     };
 
+    dispatch(Edit(userData));
+
+    dispatch(createTransaction(transactionDetails));
+
     if (formData.action === "credit") {
-      dispatch(createTransaction(transactionDetails));
-
-      dispatch(Edit(userData));
-
       dispatch(
         sendUpdateUser({
           subject: "Credit Alert",
@@ -94,10 +108,6 @@ function EditUser() {
         })
       );
     } else if (formData.action === "debit") {
-      dispatch(createTransaction(transactionDetails));
-
-      dispatch(Edit(userData));
-
       dispatch(
         sendUpdateUser({
           subject: "Debit Alert",
@@ -113,11 +123,9 @@ function EditUser() {
         })
       );
     }
-
-    // navigate("/admin/managecustomers");
   };
 
-  if (isLoading) {
+  if (isLoading || isEditLoading || isCreateTransLoading) {
     return <Spinner />;
   }
 
