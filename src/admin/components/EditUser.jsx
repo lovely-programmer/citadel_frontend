@@ -114,7 +114,7 @@ function EditUser() {
       );
     }
 
-    navigate("/admin/managecustomers");
+    // navigate("/admin/managecustomers");
   };
 
   if (isLoading) {
