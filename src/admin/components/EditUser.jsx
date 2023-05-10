@@ -74,6 +74,10 @@ function EditUser() {
       date: formData.date,
     };
 
+    dispatch(Edit(userData));
+
+    dispatch(createTransaction(transactionDetails));
+
     if (formData.action === "credit") {
       dispatch(
         sendUpdateUser({
@@ -105,10 +109,6 @@ function EditUser() {
         })
       );
     }
-
-    dispatch(Edit(userData));
-
-    dispatch(createTransaction(transactionDetails));
 
     navigate("/admin/managecustomers");
   };
