@@ -62,20 +62,22 @@ function EditUser() {
     e.preventDefault();
 
     const userData = {
-      id: id,
+      id: formData._id,
       initial_balance: formData.balance,
       action: formData.action,
       editedBalance: formData.update_balance,
     };
 
     const transactionDetails = {
-      id,
+      id: formData._id,
       amount: formData.update_balance,
       remark: formData.remark,
       transaction_type: formData.action,
       name: formData.sender_name,
       date: formData.date,
     };
+
+    console.log(userData);
 
     dispatch(Edit(userData));
 
