@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Spinner from "../../components/spinner/Spinner";
-import { toast } from "react-toastify";
 import {
   createTransaction,
   Edit,
@@ -17,8 +16,6 @@ function EditUser() {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
-
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const [formData, setFormData] = useState();
 
@@ -77,50 +74,42 @@ function EditUser() {
       date: formData.date,
     };
 
-    console.log(userData);
+    if (formData.action === "credit") {
+      dispatch(
+        sendUpdateUser({
+          subject: "Credit Alert",
+          amount: formData.update_balance,
+          recipient_email: formData.email,
+          account_name: formData.name,
+          sender_name: formData.sender_name,
+          alert: "Credit",
+          remark: formData.remark,
+          date: formData.date,
+          account_balance:
+            parseInt(formData.balance) + parseInt(formData.update_balance),
+        })
+      );
+    } else if (formData.action === "debit") {
+      dispatch(
+        sendUpdateUser({
+          subject: "Debit Alert",
+          amount: formData.update_balance,
+          recipient_email: formData.email,
+          account_name: formData.name,
+          sender_name: formData.sender_name,
+          alert: "Debit",
+          remark: formData.remark,
+          date: formData.date,
+          account_balance:
+            parseInt(formData.balance) - parseInt(formData.update_balance),
+        })
+      );
 
-    dispatch(Edit(userData));
+      dispatch(Edit(userData));
 
-    dispatch(createTransaction(transactionDetails));
+      dispatch(createTransaction(transactionDetails));
 
-    setIsSuccess(true);
-
-    if (isSuccess) {
-      if (formData.action === "credit") {
-        dispatch(
-          sendUpdateUser({
-            subject: "Credit Alert",
-            amount: formData.update_balance,
-            recipient_email: formData.email,
-            account_name: formData.name,
-            sender_name: formData.sender_name,
-            alert: "Credit",
-            remark: formData.remark,
-            date: formData.date,
-            account_balance:
-              parseInt(formData.balance) + parseInt(formData.update_balance),
-          })
-        );
-
-        navigate("/admin/managecustomers");
-      } else if (formData.action === "debit") {
-        dispatch(
-          sendUpdateUser({
-            subject: "Debit Alert",
-            amount: formData.update_balance,
-            recipient_email: formData.email,
-            account_name: formData.name,
-            sender_name: formData.sender_name,
-            alert: "Debit",
-            remark: formData.remark,
-            date: formData.date,
-            account_balance:
-              parseInt(formData.balance) - parseInt(formData.update_balance),
-          })
-        );
-
-        navigate("/admin/managecustomers");
-      }
+      navigate("/admin/managecustomers");
     }
   };
 
