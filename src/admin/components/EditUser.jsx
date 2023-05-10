@@ -77,58 +77,48 @@ function EditUser() {
       date: formData.date,
     };
 
-    if (formData.action === "credit") {
-      dispatch(Edit(userData));
+    dispatch(Edit(userData));
 
-      dispatch(createTransaction(transactionDetails));
+    dispatch(createTransaction(transactionDetails));
 
-      dispatch(
-        sendUpdateUser({
-          subject: "Credit Alert",
-          amount: formData.update_balance,
-          recipient_email: formData.email,
-          account_name: formData.name,
-          sender_name: formData.sender_name,
-          alert: "Credit",
-          remark: formData.remark,
-          date: formData.date,
-          account_balance:
-            parseInt(formData.balance) + parseInt(formData.update_balance),
-        })
-      );
+    setIsSuccess(true);
 
-      toast.success("Account Credited Successfully");
+    if (isSuccess) {
+      if (formData.action === "credit") {
+        dispatch(
+          sendUpdateUser({
+            subject: "Credit Alert",
+            amount: formData.update_balance,
+            recipient_email: formData.email,
+            account_name: formData.name,
+            sender_name: formData.sender_name,
+            alert: "Credit",
+            remark: formData.remark,
+            date: formData.date,
+            account_balance:
+              parseInt(formData.balance) + parseInt(formData.update_balance),
+          })
+        );
 
-      formData.sender_name = "";
-      formData.remark = "";
-      formData.date = "";
-      formData.update_balance = "";
-    } else if (formData.action === "debit") {
-      dispatch(Edit(userData));
+        navigate("/admin/managecustomers");
+      } else if (formData.action === "debit") {
+        dispatch(
+          sendUpdateUser({
+            subject: "Debit Alert",
+            amount: formData.update_balance,
+            recipient_email: formData.email,
+            account_name: formData.name,
+            sender_name: formData.sender_name,
+            alert: "Debit",
+            remark: formData.remark,
+            date: formData.date,
+            account_balance:
+              parseInt(formData.balance) - parseInt(formData.update_balance),
+          })
+        );
 
-      dispatch(createTransaction(transactionDetails));
-
-      dispatch(
-        sendUpdateUser({
-          subject: "Debit Alert",
-          amount: formData.update_balance,
-          recipient_email: formData.email,
-          account_name: formData.name,
-          sender_name: formData.sender_name,
-          alert: "Debit",
-          remark: formData.remark,
-          date: formData.date,
-          account_balance:
-            parseInt(formData.balance) - parseInt(formData.update_balance),
-        })
-      );
-
-      toast.success("Account Debited Successfully");
-
-      formData.sender_name = "";
-      formData.remark = "";
-      formData.date = "";
-      formData.update_balance = "";
+        navigate("/admin/managecustomers");
+      }
     }
   };
 
