@@ -8,14 +8,8 @@ const API_URL = "https://citadel-backend.onrender.com/api/transaction/";
 
 const MAIL_URL = "https://citadel-backend.onrender.com/send_recovery_email/";
 
-const createTransaction = async (data, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  const response = await axios.post(API_URL, data, config);
+const createTransaction = async (data) => {
+  const response = await axios.post(API_URL, data);
 
   return response.data;
 };
