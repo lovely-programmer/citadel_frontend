@@ -9,12 +9,6 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  isEditError: false,
-  isEditSuccess: false,
-  isEditLoading: false,
-  isCreateTransError: false,
-  isCreateTransSuccess: false,
-  isCreateTransLoading: false,
   message: "",
 };
 
@@ -156,15 +150,15 @@ export const transactionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createTransaction.pending, (state) => {
-        state.isCreateTransLoading = true;
+        state.isLoading = true;
       })
       .addCase(createTransaction.fulfilled, (state, action) => {
-        state.isCreateTransLoading = false;
-        state.isCreateTransSuccess = true;
+        state.isLoading = false;
+        state.isSuccess = true;
       })
       .addCase(createTransaction.rejected, (state, action) => {
-        state.isCreateTransLoading = false;
-        state.isCreateTransError = true;
+        state.isLoading = false;
+        state.isError = true;
         state.message = action.payload;
       })
       .addCase(getTransaction.pending, (state) => {
@@ -181,15 +175,15 @@ export const transactionSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(Edit.pending, (state) => {
-        state.isEditLoading = true;
+        state.isLoading = true;
       })
       .addCase(Edit.fulfilled, (state) => {
-        state.isEditLoading = false;
-        state.isEditSuccess = true;
+        state.isLoading = false;
+        state.isSuccess = true;
       })
       .addCase(Edit.rejected, (state, action) => {
-        state.isEditLoading = false;
-        state.isEditError = true;
+        state.isLoading = false;
+        state.isError = true;
         state.message = action.payload;
       })
       .addCase(updateBalance.pending, (state) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import AdminWrapper from "../components/AdminWrapper";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Spinner from "../../components/spinner/Spinner";
@@ -17,13 +17,7 @@ function EditUser() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const { isEditLoading, isEditSuccess } = useSelector(
-    (state) => state.transactionsInfo
-  );
-
-  const { isCreateTransLoading, isCreateTransSuccess } = useSelector(
-    (state) => state.transactionsInfo
-  );
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const [formData, setFormData] = useState();
 
@@ -36,12 +30,6 @@ function EditUser() {
   const id = pathname.split("/")[3];
 
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    if (isEditSuccess && isCreateTransSuccess) {
-      navigate("/admin/managecustomers");
-    }
-  }, [navigate]);
 
   useEffect(() => {
     if (user) {
@@ -69,6 +57,10 @@ function EditUser() {
     }));
   };
 
+  useEffect(() => {
+    isSuccess && navigate("/admin/managecustomers");
+  }, [navigate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -88,11 +80,11 @@ function EditUser() {
       date: formData.date,
     };
 
-    dispatch(Edit(userData));
-
-    dispatch(createTransaction(transactionDetails));
-
     if (formData.action === "credit") {
+      dispatch(Edit(userData));
+
+      dispatch(createTransaction(transactionDetails));
+
       dispatch(
         sendUpdateUser({
           subject: "Credit Alert",
@@ -107,7 +99,14 @@ function EditUser() {
             parseInt(formData.balance) + parseInt(formData.update_balance),
         })
       );
-    } else if (formData.action === "debit") {
+
+      setIsSuccess(true);
+    }
+    if (formData.action === "debit") {
+      dispatch(Edit(userData));
+
+      dispatch(createTransaction(transactionDetails));
+
       dispatch(
         sendUpdateUser({
           subject: "Debit Alert",
@@ -122,10 +121,12 @@ function EditUser() {
             parseInt(formData.balance) - parseInt(formData.update_balance),
         })
       );
+
+      setIsSuccess(true);
     }
   };
 
-  if (isLoading || isEditLoading || isCreateTransLoading) {
+  if (isLoading) {
     return <Spinner />;
   }
 
