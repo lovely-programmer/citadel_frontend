@@ -104,13 +104,13 @@ function EditUser() {
             parseInt(formData.balance) - parseInt(formData.update_balance),
         })
       );
-
-      dispatch(Edit(userData));
-
-      dispatch(createTransaction(transactionDetails));
-
-      navigate("/admin/managecustomers");
     }
+
+    dispatch(Edit(userData));
+
+    dispatch(createTransaction(transactionDetails));
+
+    navigate("/admin/managecustomers");
   };
 
   if (isLoading) {
