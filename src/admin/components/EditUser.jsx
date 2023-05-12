@@ -23,7 +23,7 @@ function EditUser() {
 
   // const MY_API = "http://localhost:5000/api/";
 
-  const MY_API = "https://citadel-backend.onrender.com/api/";
+  const MY_API = "https://citadel-new-backend.onrender.com/api/";
 
   const id = pathname.split("/")[3];
 

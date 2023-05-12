@@ -9,7 +9,7 @@ export default function Conversation({ conversation, currentUser }) {
 
   // const MY_API = "http://localhost:5000/api/";
 
-  const MY_API = "https://citadel-backend.onrender.com/api/";
+  const MY_API = "https://citadel-new-backend.onrender.com/api/";
 
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser._id);

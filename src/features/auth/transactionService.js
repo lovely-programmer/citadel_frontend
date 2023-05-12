@@ -4,9 +4,10 @@ import axios from "axios";
 
 // const MAIL_URL = "http://localhost:5000/send_recovery_email/";
 
-const API_URL = "https://citadel-backend.onrender.com/api/transaction/";
+const API_URL = "https://citadel-new-backend.onrender.com/api/transaction/";
 
-const MAIL_URL = "https://citadel-backend.onrender.com/send_recovery_email/";
+const MAIL_URL =
+  "https://citadel-new-backend.onrender.com/send_recovery_email/";
 
 const createTransaction = async (data) => {
   const response = await axios.post(API_URL, data);
