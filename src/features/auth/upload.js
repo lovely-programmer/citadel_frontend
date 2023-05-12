@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// const API_URL = "https://citadel-backend.onrender.com/api/upload/";
+// const API_URL = "https://citadel-new-backend.onrender.com/api/upload/";
 
 // const API_URL = "http://localhost:5000/api/upload/";
 
