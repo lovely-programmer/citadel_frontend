@@ -94,7 +94,7 @@ function EditUserData() {
                 required
                 type="text"
                 id="email"
-                name="name"
+                name="email"
                 value={formData?.email}
                 onChange={handleChange}
               />
